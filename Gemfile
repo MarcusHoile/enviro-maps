@@ -34,6 +34,11 @@ end
 
 gem "minitest-rails"
 
+group :development do
+  gem 'dotenv-rails'
+  gem 'pry-rails'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
