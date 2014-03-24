@@ -1,25 +1,18 @@
-<h1>Listing issues</h1>
+<% content_for :head do %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOAgUCn6GQzKlnMwFmO2kBvG_S3JRD38&libraries=places&sensor=false" %>
+<% end %>
+<div id="map-container">
+  <div id="map-canvas"/>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div id="info-content">
+  <h2 id="iw-title"></h2>
+  <p id="iw-description"></p>
+  <p id="iw-url"></p>
+</div>
 
-  <tbody>
-    <% @issues.each do |issue| %>
-      <tr>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Issue', new_issue_path %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    initialize();
+  });
+</script>
