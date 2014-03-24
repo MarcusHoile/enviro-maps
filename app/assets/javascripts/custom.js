@@ -20,6 +20,13 @@ function initialize() {
       { "color": "#ffffff" }
     ]
   },{
+    "featureType": "administrative.country",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "color": "#ffffff" },
+      { "weight": 0.4 }
+    ]
+  },{
     "featureType": "water",
     "elementType": "labels.text.stroke",
     "stylers": [

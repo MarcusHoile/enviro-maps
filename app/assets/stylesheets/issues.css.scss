@@ -3,11 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 html { height: 100% }
-body { height: 100%; margin: 0; padding: 40px }
+body { height: 100%; margin: 0; padding: 0px }
+
 #map-container {
-	height: 60%;
-	width: 80%;
+	height: 100%;
+	width: 100%;
 }
+
 #map-canvas { height: 100% }
 
 #info-content {
