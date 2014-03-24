@@ -1,4 +1,39 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Title:</strong>
+  <%= @issue.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @issue.description %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @issue.url %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @issue.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @issue.lng %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @issue.status %>
+</p>
+
+<p>
+  <strong>Organisation:</strong>
+  <%= @issue.organisation %>
+</p>
+
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>

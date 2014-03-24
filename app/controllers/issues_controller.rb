@@ -2,10 +2,10 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
 	before_filter :authenticate_user!, except: [:index]
-	
+
 	def index
-		gon.issues = Issue.all
-		gon.issue = Issue.first
+	  gon.issues = Issue.all
+	  gon.issue = Issue.first
 	end
 
   def show
@@ -60,6 +60,6 @@ class IssuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
-      params[:issue]
+      params.require(:issue).permit(:title, :description, :url, :lat, :lng, :status, :organisation)
     end
 end

@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOAgUCn6GQzKlnMwFmO2kBvG_S3JRD38&libraries=places&sensor=false" %>
+<% end %>
+
 <%= form_for(@issue) do |f| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +15,28 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :url, "Link to more information" %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :organisation, "Owner of Website" %><br>
+    <%= f.text_field :organisation %>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+

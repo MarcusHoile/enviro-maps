@@ -2,72 +2,72 @@ var mapCanvas;
 var map;
 var markers =[];
 var infowindow;
+var styles;
+var mapCanvasForm
 
 function initialize() {
   // set up default map options
   var lat = -25.3;
   var lng = 133.8;
   mapCanvas = document.getElementById("map-canvas");
-  
-
 
   var styles =  [
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      { "visibility": "on" },
-      { "color": "#ffffff" }
-    ]
-  },{
-    "featureType": "administrative.country",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      { "color": "#ffffff" },
-      { "weight": 0.4 }
-    ]
-  },{
-    "featureType": "water",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      { "color": "#000000" }
-    ]
-  },{
-    "featureType": "landscape.natural",
-    "stylers": [
-      { "color": "#0A1C28" }
-    ]
-  },{
-    "featureType": "administrative",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "administrative",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      { "color": "#ffffff" }
-    ]
-  },{
-  }
-];
+    {
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        { "visibility": "on" },
+        { "color": "#ffffff" }
+      ]
+    },{
+      "featureType": "administrative.country",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        { "color": "#ffffff" },
+        { "weight": 0.4 }
+      ]
+    },{
+      "featureType": "water",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        { "visibility": "off" }
+      ]
+    },{
+      "featureType": "water",
+      "elementType": "geometry.fill",
+      "stylers": [
+        { "color": "#000000" }
+      ]
+    },{
+      "featureType": "landscape.natural",
+      "stylers": [
+        { "color": "#0A1C28" }
+      ]
+    },{
+      "featureType": "administrative",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        { "visibility": "off" }
+      ]
+    },{
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        { "color": "#ffffff" }
+      ]
+    },{
+    }
+  ];
 
-var mapOptions = {
-  center: new google.maps.LatLng(lat, lng),
-  zoom: 2,
-  mapTypeControl: false,
-  panControl: false,
-  zoomControl: false,
-  streetViewControl: false,
-  styles: styles
-};
+  var mapOptions = {
+    center: new google.maps.LatLng(lat, lng),
+    zoom: 2,
+    mapTypeControl: false,
+    panControl: false,
+    zoomControl: false,
+    streetViewControl: false,
+    styles: styles
+  };
 
   // create a map
   map = new google.maps.Map(mapCanvas,
@@ -76,7 +76,30 @@ var mapOptions = {
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('info-content')
   });
-  fetchIssues();
+}
+
+
+
+function mapForm() {
+  // set up default map options
+  var lat = -25.3;
+  var lng = 133.8;
+  mapCanvasForm = document.getElementById("map-canvas-form");
+
+  var mapOptions = {
+    center: new google.maps.LatLng(lat, lng),
+    zoom: 2,
+    mapTypeControl: false,
+    panControl: false,
+    zoomControl: false,
+    streetViewControl: false,
+    styles: styles
+  };
+
+  // create a map
+  map = new google.maps.Map(mapCanvasForm,
+    mapOptions);
+
 }
 
 function fetchIssues() {
