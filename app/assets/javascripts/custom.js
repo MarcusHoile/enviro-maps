@@ -32,16 +32,6 @@ function initialize() {
 
 function createMarker() {
   var markers = gon.markers
-  var markerObj = gon.marker
-  var myLatlng = new google.maps.LatLng(markerObj.lat, markerObj.lng);
-
-  // place single marker on the map
-  // var marker = new google.maps.Marker({
-  //   position: myLatlng,
-  //   map: map,
-  // });
-
-
 
   // on click of marker show custom content in infowindow
   // google.maps.event.addListener(marker, 'click', function() {
@@ -56,19 +46,37 @@ function createMarker() {
       position: new google.maps.LatLng(markers[i].lat,markers[i].lng),
       map: map
     });
-    // If the user clicks a hotel marker, show the details of that hotel
+    // If the user clicks a marker, show the details of that marker
     // in an info window.
-    // markers[i].placeResult = results[i];
-    // google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+    google.maps.event.addListener(markers[i], 'click', showInfoWindow);
     // setTimeout(dropMarker(i), i * 100);
     // addResult(results[i], i);
   }
 }
 
-
-
-function dropMarker(i) {
-  return function() {
-    markers[i].setMap(map);
-  };
+// Get the details for the marker. Show the information in an info window,
+// anchored on the marker that the user selected.
+function showInfoWindow() {
+  var marker = this;
+  
+  infowindow.open(map, marker);
+  
+  // places.getDetails({reference: marker.placeResult.reference},
+  //   function(place, status) {
+  //     if (status != google.maps.places.PlacesServiceStatus.OK) {
+  //       return;
+  //     }
+  //     infowindow.open(map, marker);
+  //     buildIWContent(marker);
+  //   });
 }
+
+function buildIWContent(marker) {
+  document.getElementById('iw-url').innerHTML = '<b><a href="' + marker.url +
+  '">' + marker.organisation + '</a></b>';
+  document.getElementById('iw-description').textContent = marker.description;
+  document.getElementById('iw-title').textContent = marker.title;
+}
+
+
+
