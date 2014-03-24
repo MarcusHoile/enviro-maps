@@ -1,3 +1,0 @@
-class MarkersController < ApplicationController
-
-end
