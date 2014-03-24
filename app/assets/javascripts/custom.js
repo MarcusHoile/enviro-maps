@@ -31,7 +31,8 @@ function initialize() {
 }
 
 function createMarker() {
-  var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+  var  marker = gon.marker
+  var myLatlng = new google.maps.LatLng(marker.lat, marker.lng);
 
   var marker = new google.maps.Marker({
     position: myLatlng,
