@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-EnviroMaps::Application.config.secret_key_base = '9a99bd84acd97ab50dbcd25576a7b0cc0e9d70a6c78757fafdd53f9536801aa3aa49d250c4462869f7235145ac46af9294ba14caa7e4a624b981a6f92bd11f46'
+EnviroMaps::Application.config.secret_key_base = ENV['RAILS_SECRET_KEY_BASE']

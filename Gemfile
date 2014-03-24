@@ -36,8 +36,11 @@ end
 
 gem "minitest-rails"
 
-group :development do
+
+
+group :development, :test do
   gem 'dotenv-rails'
+  gem 'rspec-rails'
   gem 'pry-rails'
 end
 
