@@ -3,5 +3,5 @@ EnviroMaps::Application.routes.draw do
   resources :users
   resources :markers
 
-  root to: "markers#index"
+  root to: "issues#index"
 end

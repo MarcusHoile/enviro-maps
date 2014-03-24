@@ -1,9 +1,5 @@
 var mapCanvas;
-var location;
-var marker;
 var map;
-var places;
-gon.markers;
 var markers;
 
 function initialize() {
@@ -31,7 +27,7 @@ function initialize() {
 }
 
 function createMarker() {
-  var markers = gon.markers
+  var issues = gon.issues
 
   // on click of marker show custom content in infowindow
   // google.maps.event.addListener(marker, 'click', function() {
@@ -41,14 +37,14 @@ function createMarker() {
   // });
 
   // Create a marker on the map for each in markers 
-  for (var i = 0; i < markers.length; i++) {
-    markers[i] = new google.maps.Marker({
-      position: new google.maps.LatLng(markers[i].lat,markers[i].lng),
+  for (var i = 0; i < issues.length; i++) {
+    issues[i] = new google.maps.Marker({
+      position: new google.maps.LatLng(issues[i].lat,issues[i].lng),
       map: map
     });
     // If the user clicks a marker, show the details of that marker
     // in an info window.
-    google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+    google.maps.event.addListener(issues[i], 'click', showInfoWindow);
     // setTimeout(dropMarker(i), i * 100);
     // addResult(results[i], i);
   }
@@ -58,7 +54,7 @@ function createMarker() {
 // anchored on the marker that the user selected.
 function showInfoWindow() {
   var marker = this;
-  
+
   infowindow.open(map, marker);
   
   // places.getDetails({reference: marker.placeResult.reference},
