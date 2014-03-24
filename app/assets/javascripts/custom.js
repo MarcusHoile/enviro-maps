@@ -1,6 +1,6 @@
 var mapCanvas;
 var map;
-var markers;
+var markers = [];
 
 function initialize() {
   var lat = -25.3;
@@ -23,31 +23,45 @@ function initialize() {
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('info-content')
   });
-  createMarker();
+  createMarkers();
 }
 
-function createMarker() {
+function createMarkers() {
   var issues = gon.issues
+
 
   // on click of marker show custom content in infowindow
   // google.maps.event.addListener(marker, 'click', function() {
   //   infowindow.setContent(place.name + "<br><br><button>do something</button>");
-  //   // infowindow.setContent();
   //   infowindow.open(map, this);
   // });
 
   // Create a marker on the map for each in markers 
   for (var i = 0; i < issues.length; i++) {
-    issues[i] = new google.maps.Marker({
-      position: new google.maps.LatLng(issues[i].lat,issues[i].lng),
-      map: map
-    });
+    // marker[i] = new google.maps.Marker({
+    //   position: new google.maps.LatLng(issues[i].lat,issues[i].lng),
+    //   map: map
+      createMarker(issues[i]);
+    
     // If the user clicks a marker, show the details of that marker
     // in an info window.
-    google.maps.event.addListener(issues[i], 'click', showInfoWindow);
-    // setTimeout(dropMarker(i), i * 100);
-    // addResult(results[i], i);
+
   }
+}
+
+function createMarker(issue) {
+  var location = new google.maps.LatLng(issue.lat, issue.lng);
+  marker = new google.maps.Marker({
+    map: map,
+    position: location
+  });
+  markers.push(marker);
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(issue.title + "<br><br><button>do something</button>");
+    // infowindow.setContent();
+    infowindow.open(map, this);
+  });
 }
 
 // Get the details for the marker. Show the information in an info window,

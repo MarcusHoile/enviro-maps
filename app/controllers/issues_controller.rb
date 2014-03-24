@@ -3,6 +3,7 @@ class IssuesController < ApplicationController
 	
 	def index
 		gon.issues = Issue.all
+		gon.issue = Issue.first
 	end
 
 	def create
