@@ -3,9 +3,10 @@ var map;
 var markers =[];
 var infowindow;
 var styles;
-var mapCanvasForm
+var mapCanvasForm;
 var lat;
 var lng;
+var rectangle;
 
 function initialize() {
   // set up default map options
@@ -78,19 +79,25 @@ function initialize() {
   map = new google.maps.Map(mapCanvas,
     mapOptions);
 
+  // instantiate the infowindow 
   infowindow = new google.maps.InfoWindow({
-    content: document.getElementById('info-content')
   });
 
+  // add listener for any zoom changes and set max zoom
   google.maps.event.addListener(map, 'zoom_changed', function() {
     if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
   });
 
+  // add listener for any info window open, if click anywhere outside window it closes
   google.maps.event.addListener(map, 'click', function() {
     if (isInfoWindowOpen(infowindow)){
       infowindow.close();
     }
   });
+
+  $('#reset-zoom').on('click', function() {
+    map.setZoom(2);
+  })
 }
 
 function isInfoWindowOpen(infoWindow){
@@ -149,8 +156,12 @@ function mapForm() {
       getMarkerPosition(event);
     });
   });
-
 }
+
+function openContentWindow() {
+  $('#content-window').css('display', 'block');
+}
+
 
 function getMarkerPosition(event){
   console.log(event.latLng);
@@ -175,18 +186,35 @@ function createMarker(issue) {
     position: location,
   });
 
-  // add listener for when user clicks a marker
-  // open infowindow with content
+  // add listener for when user clicks a marker open infowindow with content
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
-    // center and zoom in on location
     
+    // center and zoom in on location
     // map.setZoom(5);
     map.setCenter(this.getPosition());
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
+    openContentWindow();
+
+
     // set content and open window
-    infowindow.setContent("<div id='info-content'><h2>" + issue.title + "</h2><p>" + issue.description + "</p><a href='" + issue.url + "' target='_blank'>" + issue.organisation + "</a></div>");
-    infowindow.open(map, this);
+    // infowindow.setContent("<div id='info-content'><h2>" + issue.title + "</h2><p>" + issue.description + "</p><a href='" + issue.url + "' target='_blank'>" + issue.organisation + "</a></div>");
+    // var $infoDiv = $('#info-content').parent()  ;
+    // $infoDiv.addClass('funky');
+    // infowindow.open(map, this);
+
+    // rectangle = new google.maps.Rectangle({
+    // strokeColor: '#FF0000',
+    // strokeOpacity: 0.8,
+    // strokeWeight: 2,
+    // fillColor: '#FF0000',
+    // fillOpacity: 0.35,
+    // map: map,
+    // bounds: new google.maps.LatLngBounds(
+    //   new google.maps.LatLng(this.position.lat() + 1, this.position.lng() + 1),
+    //   new google.maps.LatLng(this.position.lat() + 5, this.position.lng() + 10))
+    // });
+
   });
 }
 
@@ -195,10 +223,11 @@ function smoothZoom (map, max, current) {
   if (current >= max) {
     return;
   } else {
-    z = google.maps.event.addListener(map, 'zoom_changed', function(event){
-        google.maps.event.removeListener(z);
-        smoothZoom(map, max, current + 1);
-      });
+    // recursive loop until zoom equals max
+    var z = google.maps.event.addListener(map, 'zoom_changed', function(event){
+      google.maps.event.removeListener(z);
+      smoothZoom(map, max, current + 1);
+    });
     setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
 }  
