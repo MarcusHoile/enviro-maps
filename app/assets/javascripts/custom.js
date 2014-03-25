@@ -81,25 +81,39 @@ function initialize() {
 
 
 function mapForm() {
-  // set up default map options
-  var lat = -25.3;
-  var lng = 133.8;
-  mapCanvasForm = document.getElementById("map-canvas-form");
+  // lat lng variables for this function only
+  var lat;
+  var lng;
+  // adds listener for when a user marks a location for an issue
+  google.maps.event.addListenerOnce(map, 'click', function(event) {   
+    var marker2 = new google.maps.Marker({position: event.latLng, map: map});
+    var location = event.latLng;
+    console.log(event.latLng);
+    lat = event.latLng.lat();
+    lng = event.latLng.lng();
+    $('#issue_lat').val(lat);
+    $('#issue_lng').val(lng);
+  });
 
-  var mapOptions = {
-    center: new google.maps.LatLng(lat, lng),
-    zoom: 2,
-    mapTypeControl: false,
-    panControl: false,
-    zoomControl: false,
-    streetViewControl: false,
-    styles: styles
-  };
-
-  // create a map
-  map = new google.maps.Map(mapCanvasForm,
-    mapOptions);
-
+  // // on submit post the form values, token and latlng to create action
+  // form.submit(function() { 
+  //   // grabs all the values from the form and the token
+  //   var valuesToSubmit = $(this).serialize();
+  //   // insert the lat and lng
+  //   valuesToSubmit['issue']['lat'] = lat;
+  //   valuesToSubmit['issue']['lng'] = lng;
+  //   console.log(valuesToSubmit['issue']);
+    
+  //   $.ajax({
+  //       type: "POST",
+  //       url: $(this).attr('action'), //sumbits it to the given url of the form
+  //       data: valuesToSubmit,
+  //       dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+  //   }).success(function(){
+  //       alert("post successful");
+  //   });
+  //   return false; // prevents normal behaviour
+  // });
 }
 
 function fetchIssues() {

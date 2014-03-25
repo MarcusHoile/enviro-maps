@@ -2,7 +2,7 @@
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOAgUCn6GQzKlnMwFmO2kBvG_S3JRD38&libraries=places&sensor=false" %>
 <% end %>
 
-<%= form_for(@issue) do |f| %>
+<%= form_for(@issue, html: {id: "form"}) do |f| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
@@ -31,6 +31,12 @@
     <%= f.label :organisation, "Owner of Website" %><br>
     <%= f.text_field :organisation %>
   </div>
+  <div class="field">
+    <%= f.hidden_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :lng %>
+  </div>
   <div class="actions">
     <%= f.submit "Submit issue", id: "form-button" %>
   </div>
@@ -40,43 +46,10 @@
   <script type="text/javascript">
   $(document).ready(function(){
     initialize();
-    google.maps.event.addListenerOnce(map, 'click', function(event) {   
-      var marker2 = new google.maps.Marker({position: event.latLng, map: map});
-      // var location = event.latLng;
-      console.log(event.latLng);
-      var lat = event.letLng.lat();
-      var lng = event.letLng.lng();
-    });
+    mapForm();
   });
 
-  //   $('#form-button').on('click', function(event){
-  //   // var title = $('#issue_title2').val();
-  //   // var token_param = $("meta[name=csrf-token]").attr("content");
-  //   event.preventDefault();
-  //   $.ajaxPrefilter({
-  //     type: "POST",
-  //     url: "/issues",
-  //     data: {issue: { title: "John", description: "This is  a longer description so i can see it on the db." } }
-  //   });
-  // });
 
-    $('form').submit(function() { 
-    // grabs all the values from the form and the token
-    var valuesToSubmit = $(this).serialize();
-    // insert the lat and lng
-    valuesToSubmit['issue']['lat'] = 33;
-    valuesToSubmit['issue']['lng'] = 120;
-    
-    $.ajax({
-        type: "POST",
-        url: $(this).attr('action'), //sumbits it to the given url of the form
-        data: valuesToSubmit,
-        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-    }).success(function(){
-        alert("post successful");
-    });
-    return false; // prevents normal behaviour
-});
 </script>
 
 

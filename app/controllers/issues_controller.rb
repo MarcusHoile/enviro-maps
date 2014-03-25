@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
 
   def create
     @issue = Issue.new(issue_params)
-
+    binding.pry
     respond_to do |format|
       if @issue.save
         format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
