@@ -85,14 +85,26 @@ function initialize() {
   google.maps.event.addListener(map, 'zoom_changed', function() {
     if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
   });
+
+  google.maps.event.addListener(map, 'click', function() {
+    if (isInfoWindowOpen(infowindow)){
+      infowindow.close();
+    }
+  });
 }
 
-function setBounds() {
+function isInfoWindowOpen(infoWindow){
+  var map = infoWindow.getMap();
+  return (map !== null && typeof map !== "undefined");
+}
 
+
+
+function setBounds() {
    // Bounds for North America
    var strictBounds = new google.maps.LatLngBounds(
-     new google.maps.LatLng(28.70, -127.50), 
-     new google.maps.LatLng(48.85, -55.90)
+     new google.maps.LatLng(80, 180), 
+     new google.maps.LatLng(-80, -179)
    );
 
    // Listen for the dragend event
