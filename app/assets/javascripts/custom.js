@@ -9,9 +9,12 @@ var lng;
 
 function initialize() {
   // set up default map options
-  var lat = -25.3;
-  var lng = 133.8;
+  var lat = 20;
+  var lng = 60;
   mapCanvas = document.getElementById("map-canvas");
+  var maxZoom = 2;
+
+
 
   var styles =  [
     {
@@ -78,6 +81,41 @@ function initialize() {
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('info-content')
   });
+
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+    if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
+  });
+}
+
+function setBounds() {
+
+   // Bounds for North America
+   var strictBounds = new google.maps.LatLngBounds(
+     new google.maps.LatLng(28.70, -127.50), 
+     new google.maps.LatLng(48.85, -55.90)
+   );
+
+   // Listen for the dragend event
+   google.maps.event.addListener(map, 'dragend', function() {
+     if (strictBounds.contains(map.getCenter())) return;
+
+     // We're out of bounds - Move the map back within the bounds
+
+     var c = map.getCenter(),
+         x = c.lng(),
+         y = c.lat(),
+         maxX = strictBounds.getNorthEast().lng(),
+         maxY = strictBounds.getNorthEast().lat(),
+         minX = strictBounds.getSouthWest().lng(),
+         minY = strictBounds.getSouthWest().lat();
+
+     if (x < minX) x = minX;
+     if (x > maxX) x = maxX;
+     if (y < minY) y = minY;
+     if (y > maxY) y = maxY;
+
+     map.setCenter(new google.maps.LatLng(y, x));
+   });
 }
 
 
