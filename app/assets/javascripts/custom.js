@@ -157,12 +157,10 @@ function mapForm() {
 }
 
 function openContentWindow() {
+  var contentWindow = $('#content-window');
+  contentWindow.addClass('animated slideInRight');
 
-  $('#content-window').animate({
-    opacity: 0.4
-  }, 3000 );
-
-  // .css('display', 'block');
+  contentWindow.css('display', 'block');
 }
 
 
@@ -201,7 +199,7 @@ function createMarker(issue) {
     
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
-    setTimeout(openContentWindow, 400);
+    openContentWindow();
 
   });
 }

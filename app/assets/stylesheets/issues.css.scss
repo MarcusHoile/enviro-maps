@@ -11,13 +11,15 @@ body { height: 100%; margin: 0; padding: 0px }
 
 #content-window {
 	position:fixed;
-	right:0;
-	height:100%;
+	right:0px;
+	height:80%;
 	width: 55%;
 	background: red;
 	z-index:100000;
+	opacity:0.6;
 	display:none;
-
+	border: solid 1px red;
+	margin-top: 40px;
 }
 
 
