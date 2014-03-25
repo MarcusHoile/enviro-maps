@@ -60,8 +60,13 @@
   //   });
   // });
 
-    $('form').submit(function() {  
+    $('form').submit(function() { 
+    // grabs all the values from the form and the token
     var valuesToSubmit = $(this).serialize();
+    // insert the lat and lng
+    valuesToSubmit['issue']['lat'] = 33;
+    valuesToSubmit['issue']['lng'] = 120;
+    
     $.ajax({
         type: "POST",
         url: $(this).attr('action'), //sumbits it to the given url of the form

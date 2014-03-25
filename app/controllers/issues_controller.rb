@@ -19,7 +19,6 @@ class IssuesController < ApplicationController
   end
 
   def create
-    binding.pry
     @issue = Issue.new(issue_params)
 
     respond_to do |format|
