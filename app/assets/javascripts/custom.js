@@ -157,6 +157,7 @@ function mapForm() {
 }
 
 function openContentWindow() {
+
   $('#content-window').css('display', 'block');
 }
 
@@ -188,14 +189,15 @@ function createMarker(issue) {
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
     lat = this.getPosition().lat();
-    lng = this.getPosition().lng() + 8;
+    lng = (this.getPosition().lng() + 12);
     var location = new google.maps.LatLng(lat, lng);
     
     // center and zoom in on location
     // move to left a few degreees for the content window
-    map.setCenter(location);
+    
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
-    openContentWindow();
+    map.setCenter(location);
+    setTimeout(openContentWindow, 400);
 
   });
 }
@@ -210,7 +212,7 @@ function smoothZoom (map, max, current) {
       google.maps.event.removeListener(z);
       smoothZoom(map, max, current + 1);
     });
-    setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+    setTimeout(function(){map.setZoom(current)}, 40); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
 }  
 
