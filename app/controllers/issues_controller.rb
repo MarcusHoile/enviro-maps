@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
 
 	def index
 	  gon.issues = Issue.all
-	  gon.issue = Issue.first
+	  
 	end
 
   def show
@@ -16,15 +16,15 @@ class IssuesController < ApplicationController
   end
 
   def edit
+    gon.issue = @issue
   end
 
   def create
     @issue = Issue.new(issue_params)
-    binding.pry
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @issue }
+        format.html { redirect_to issues_path, notice: 'Issue was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @issue }
       else
         format.html { render action: 'new' }
         format.json { render json: @issue.errors, status: :unprocessable_entity }
