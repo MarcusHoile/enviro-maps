@@ -174,14 +174,34 @@ function createMarker(issue) {
     map: map,
     position: location,
   });
-  // store all the markers in an array
-  // markers.push(marker);
 
-  google.maps.event.addListener(marker, 'click', function() {
+  // add listener for when user clicks a marker
+  // open infowindow with content
+  // zoom in to location
+  google.maps.event.addListener(marker, 'click', function(event) {
+    // center and zoom in on location
+    
+    // map.setZoom(5);
+    map.setCenter(this.getPosition());
+    smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
+    // set content and open window
     infowindow.setContent("<div id='info-content'><h2>" + issue.title + "</h2><p>" + issue.description + "</p><a href='" + issue.url + "' target='_blank'>" + issue.organisation + "</a></div>");
     infowindow.open(map, this);
   });
 }
+
+// the smooth zoom function
+function smoothZoom (map, max, current) {
+  if (current >= max) {
+    return;
+  } else {
+    z = google.maps.event.addListener(map, 'zoom_changed', function(event){
+        google.maps.event.removeListener(z);
+        smoothZoom(map, max, current + 1);
+      });
+    setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+  } 
+}  
 
 function editMarker(issue) {
   var location = new google.maps.LatLng(issue.lat, issue.lng);
