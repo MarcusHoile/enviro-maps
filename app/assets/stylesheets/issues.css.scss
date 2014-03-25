@@ -9,30 +9,11 @@ body { height: 100%; margin: 0; padding: 0px }
 	margin-top:60px;
 }
 
-
-/*--------- info window stylez cuzzy bro -----------*/
-#info-content {
-	border:solid 1px red;
-}
-.funky {
-	border:solid 1px red;
-	background: #000;
-}
-
-
-.infowindow-text {
-	font-size: 48px;
-	color:#fff;
-}
-
-/*----------- itz overz bro ----------------------*/
-
-
 #content-window {
 	position:fixed;
 	right:0;
 	height:100%;
-	width: 35%;
+	width: 55%;
 	background: red;
 	z-index:100000;
 	display:none;

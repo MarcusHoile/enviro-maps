@@ -1,12 +1,10 @@
 var mapCanvas;
 var map;
 var markers =[];
-var infowindow;
-var styles;
 var mapCanvasForm;
 var lat;
 var lng;
-var rectangle;
+var pozzy;
 
 function initialize() {
   // set up default map options
@@ -189,31 +187,15 @@ function createMarker(issue) {
   // add listener for when user clicks a marker open infowindow with content
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
+    lat = this.getPosition().lat();
+    lng = this.getPosition().lng() + 8;
+    var location = new google.maps.LatLng(lat, lng);
     
     // center and zoom in on location
-    // map.setZoom(5);
-    map.setCenter(this.getPosition());
+    // move to left a few degreees for the content window
+    map.setCenter(location);
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     openContentWindow();
-
-
-    // set content and open window
-    // infowindow.setContent("<div id='info-content'><h2>" + issue.title + "</h2><p>" + issue.description + "</p><a href='" + issue.url + "' target='_blank'>" + issue.organisation + "</a></div>");
-    // var $infoDiv = $('#info-content').parent()  ;
-    // $infoDiv.addClass('funky');
-    // infowindow.open(map, this);
-
-    // rectangle = new google.maps.Rectangle({
-    // strokeColor: '#FF0000',
-    // strokeOpacity: 0.8,
-    // strokeWeight: 2,
-    // fillColor: '#FF0000',
-    // fillOpacity: 0.35,
-    // map: map,
-    // bounds: new google.maps.LatLngBounds(
-    //   new google.maps.LatLng(this.position.lat() + 1, this.position.lng() + 1),
-    //   new google.maps.LatLng(this.position.lat() + 5, this.position.lng() + 10))
-    // });
 
   });
 }
