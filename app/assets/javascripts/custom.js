@@ -114,7 +114,8 @@ function createMarker(issue) {
   var location = new google.maps.LatLng(issue.lat, issue.lng);
   marker = new google.maps.Marker({
     map: map,
-    position: location
+    position: location,
+    // icon: "<div id='icon'></div>"
   });
   // store all the markers in an array
   markers.push(marker);

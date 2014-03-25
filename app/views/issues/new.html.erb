@@ -5,19 +5,13 @@
 
 <%= render 'form' %>
 
-  <div id="map-container">
+
+ <div id="map-container">
     <div id="map-canvas"/>
   </div>
 
-  <script type="text/javascript">
-  $(document).ready(function(){
-    initialize();
-    google.maps.event.addListenerOnce(map, 'click', function(event) {   
-	    var marker2 = new google.maps.Marker({position: event.latLng, map: map});
-	    // var location = event.latLng;
-	    console.log(event.latLng);
-	    var lat = event.letLng.lat();
-	    var lng = event.letLng.lng();
-		});
-  });
+<script>
+
 </script>
+
+

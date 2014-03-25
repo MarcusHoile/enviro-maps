@@ -45,6 +45,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+	gem 'simplecov' # testing coverage checker
 end
 
 # Use ActiveModel has_secure_password

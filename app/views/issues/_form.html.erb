@@ -31,12 +31,51 @@
     <%= f.label :organisation, "Owner of Website" %><br>
     <%= f.text_field :organisation %>
   </div>
-
-
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit issue", id: "form-button" %>
   </div>
 <% end %>
+
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    initialize();
+    google.maps.event.addListenerOnce(map, 'click', function(event) {   
+      var marker2 = new google.maps.Marker({position: event.latLng, map: map});
+      // var location = event.latLng;
+      console.log(event.latLng);
+      var lat = event.letLng.lat();
+      var lng = event.letLng.lng();
+    });
+  });
+
+  //   $('#form-button').on('click', function(event){
+  //   // var title = $('#issue_title2').val();
+  //   // var token_param = $("meta[name=csrf-token]").attr("content");
+  //   event.preventDefault();
+  //   $.ajaxPrefilter({
+  //     type: "POST",
+  //     url: "/issues",
+  //     data: {issue: { title: "John", description: "This is  a longer description so i can see it on the db." } }
+  //   });
+  // });
+
+    $('form').submit(function() {  
+    var valuesToSubmit = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: $(this).attr('action'), //sumbits it to the given url of the form
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+    }).success(function(){
+        alert("post successful");
+    });
+    return false; // prevents normal behaviour
+});
+</script>
+
+
+
 
 
 
