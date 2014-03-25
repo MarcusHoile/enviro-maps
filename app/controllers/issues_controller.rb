@@ -20,10 +20,10 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Issue.new(issue_params)
+    @issue = current_user.issues.new(issue_params)
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to issues_path, notice: 'Issue was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Issue was successfully created.' }
         format.json { render action: 'index', status: :created, location: @issue }
       else
         format.html { render action: 'new' }

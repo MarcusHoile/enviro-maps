@@ -2,7 +2,7 @@
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOAgUCn6GQzKlnMwFmO2kBvG_S3JRD38&libraries=places&sensor=false" %>
 <% end %>
 
-<%= form_for(@issue, html: {id: "form"}) do |f| %>
+<%= form_for([current_user, @issue], html: {id: "form"}) do |f| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
