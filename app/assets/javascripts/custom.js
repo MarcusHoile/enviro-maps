@@ -158,7 +158,11 @@ function mapForm() {
 
 function openContentWindow() {
 
-  $('#content-window').css('display', 'block');
+  $('#content-window').animate({
+    opacity: 0.4
+  }, 3000 );
+
+  // .css('display', 'block');
 }
 
 
