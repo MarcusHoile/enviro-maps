@@ -17,7 +17,14 @@ function initialize() {
   mapCanvas = document.getElementById("map-canvas");
   var maxZoom = 2;
   contentWindow = $('#content-window');
-
+  $('#zoom-out').on('click', function(){
+    var zoom = map.getZoom()
+    map.setZoom(zoom - 1);
+  });
+  $('#zoom-in').on('click', function(){
+    var zoom = map.getZoom()
+    map.setZoom(zoom + 1);
+  })
 
   var styles =  [
     {
@@ -31,8 +38,8 @@ function initialize() {
       "featureType": "administrative.country",
       "elementType": "geometry.stroke",
       "stylers": [
-        { "color": "#ffffff" },
-        { "weight": 0.4 }
+        { "color": "#00ADEF" },
+        { "weight": 0.3 }
       ]
     },{
       "featureType": "water",
@@ -69,7 +76,13 @@ function initialize() {
     "stylers": [
       { "visibility": "off" }
     ]
-  },{
+  },  {
+    "featureType": "administrative.province",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }, {
     "featureType": "administrative.locality",
     "elementType": "labels",
     "stylers": [
@@ -104,6 +117,18 @@ function initialize() {
     ]
   },{
     "featureType": "transit",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "labels",
     "stylers": [
       { "visibility": "off" }
     ]
@@ -197,7 +222,7 @@ function getImages(issue){
       alert(data); 
     });
 
-    
+
   $.ajax({
     type: "GET",
     url: '/issues/' + issue.id + '/assets',
@@ -253,7 +278,7 @@ function createMarker(issue) {
   marker = new google.maps.Marker({
     map: map,
     position: location,
-    icon: "/assets/radial-blue-20.png"
+    icon: "/assets/radial-orange-25.png"
   });
   // add listener for when user clicks a marker open content window with content
   // zoom in to location
