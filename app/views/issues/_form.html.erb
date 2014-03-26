@@ -5,6 +5,8 @@
 
 
 <div id="form-container">
+        <% form_text = (@issue.new_record?) ? "New Issue" : "Update Issue" %>
+      <h1><%= form_text %></h1> 
   <div class="row form">
   <%= form_for([current_user, @issue], html: {id: "form"}) do |f| %>
     <% if @issue.errors.any? %>
@@ -43,7 +45,9 @@
       <%= f.hidden_field :lng %>
     </div>
     <div class="actions">
-      <%= f.submit "Submit issue", :class => "form-control" %>
+      <%# display differnt copy for button when updating %>
+      <% button_text = (@issue.new_record?) ? "Submit Issue" : "Update Issue" %>
+      <button class="btn btn-primary"><%= button_text %></button>
     </div>
   <% end %>
 </div>
