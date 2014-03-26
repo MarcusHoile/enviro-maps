@@ -4,7 +4,6 @@ var markers =[];
 var mapCanvasForm;
 var lat;
 var lng;
-var pozzy;
 var contentWindow;
 var maxZoom;
 
@@ -79,13 +78,12 @@ function initialize() {
   map = new google.maps.Map(mapCanvas,
     mapOptions);
 
-
   // add listener for any zoom changes and set max zoom
   google.maps.event.addListener(map, 'zoom_changed', function() {
     if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
   });
 
-  // add listener for any info window open, if click anywhere outside window it closes
+  // add listener for any content window open, if click anywhere outside window it closes
   google.maps.event.addListener(map, 'click', function() {
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
@@ -93,20 +91,15 @@ function initialize() {
     }
   });
 
+  // add reset zoom function to nav bar button
   $('#reset-zoom').on('click', function() {
-    map.setZoom(2);
+    resetZoom(map, maxZoom, map.getZoom());
   })
 }
 
-function isInfoWindowOpen(infoWindow){
-  var map = infoWindow.getMap();
-  return (map !== null && typeof map !== "undefined");
-}
-
-
 
 function setBounds() {
-   // Bounds for North America
+   // Bounds is the whole world
    var strictBounds = new google.maps.LatLngBounds(
      new google.maps.LatLng(80, 180), 
      new google.maps.LatLng(-80, -179)
@@ -117,7 +110,6 @@ function setBounds() {
      if (strictBounds.contains(map.getCenter())) return;
 
      // We're out of bounds - Move the map back within the bounds
-
      var c = map.getCenter(),
          x = c.lng(),
          y = c.lat(),
@@ -135,10 +127,7 @@ function setBounds() {
    });
 }
 
-
-
 function mapForm() {
-
   // adds listener for when a user marks a location for an issue
   google.maps.event.addListener(map, 'click', function(event) {
     // clear markers and create new one 
@@ -165,8 +154,6 @@ function addContent(issue) {
 function openContentWindow() {
   contentWindow.toggleClass('slideInRight slideOutRight');
   contentWindow.css('display', 'block');
-  // contentWindow.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', contentWindow.removeClass('animated slideInRight'));
-  
 }
 
 
@@ -193,7 +180,7 @@ function createMarker(issue) {
     position: location,
   });
 
-  // add listener for when user clicks a marker open infowindow with content
+  // add listener for when user clicks a marker open content window with content
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
 
