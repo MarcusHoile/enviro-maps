@@ -2,15 +2,21 @@ require "test_helper"
 
 describe IssuesController do
 
-  before do
-    @issue = issues(:one)
-  end
+    let(:issue) do
+      @issue = Issue.new(title: "This is a title", description: "some description", url: "http://url.com", organisation: "Greenpeace")
+    end
 
-  it "must get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:issues)
-  end
+    describe "issue content" do
+      it "has a title" do
+        @issue.title.must_equal ("This is a title")
+      end
+    end
+
+  # it "must get index" do
+  #   get :index
+  #   assert_response :success
+  #   assert_not_nil assigns(:issues)
+  # end
 
   it "must get new" do
     get :new

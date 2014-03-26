@@ -37,9 +37,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "minitest-rails"
-
-
 
 group :development, :test do
   gem 'dotenv-rails'
