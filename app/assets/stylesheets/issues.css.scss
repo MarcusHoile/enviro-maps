@@ -14,12 +14,13 @@ body { height: 100%; margin: 0; padding: 0px }
 	right:0px;
 	height:80%;
 	width: 55%;
-	background: red;
+	background: rgba(255, 0, 0, 0.5);
 	z-index:100000;
-	opacity:0.6;
 	display:none;
-	border: solid 1px red;
+	border: solid 2px red;
+	border-right:none;
 	margin-top: 40px;
+	color:white;
 }
 
 

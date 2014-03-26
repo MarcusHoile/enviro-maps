@@ -156,11 +156,17 @@ function mapForm() {
   });
 }
 
+function addContent(issue) {
+  $('#marker-title').html(issue.title);
+  $('#marker-description').html(issue.description);
+  $('#marker-url').html(issue.url);
+}
+
 function openContentWindow() {
   var contentWindow = $('#content-window');
   contentWindow.addClass('animated slideInRight');
-
   contentWindow.css('display', 'block');
+  
 }
 
 
@@ -190,16 +196,20 @@ function createMarker(issue) {
   // add listener for when user clicks a marker open infowindow with content
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
+
+    // move to location left a few degreees for the content window
     lat = this.getPosition().lat();
     lng = (this.getPosition().lng() + 12);
     var location = new google.maps.LatLng(lat, lng);
     
+
     // center and zoom in on location
-    // move to left a few degreees for the content window
-    
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
     openContentWindow();
+
+    // insert issue content to content window
+    addContent(issue);
 
   });
 }
@@ -229,7 +239,6 @@ function editMarker(issue) {
   google.maps.event.addListener(marker, 'dragend', function(event) {
     getMarkerPosition(event);
   });
-  // mapForm();
 }
 
 
