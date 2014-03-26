@@ -6,17 +6,16 @@
 		<h1 id="marker-title" class="marker-content"></h1>
 		<div id="marker-description" class="marker-content"></div>
 		<div id="marker-url" class="marker-content"></div>
+    <div id="marker-images" class="marker-content"><%= image_tag @asset.image.url %></div>
 	</div>
   <div id="map-canvas">
   </div>
 </div>
 
 <script type="text/javascript">
-// var icon = <%= image_path "radial-blue.png" %>;
+
   $(document).ready(function(){
     initialize();
     fetchIssues();
-
-    // setBounds();
   });
 </script>

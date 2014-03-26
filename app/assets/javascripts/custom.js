@@ -192,6 +192,7 @@ function addContent(issue) {
   $('#marker-title').html(issue.title);
   $('#marker-description').html(issue.description);
   $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
+  var asset = gon.asset;
 }
 
 function openContentWindow() {
