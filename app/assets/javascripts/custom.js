@@ -5,14 +5,16 @@ var mapCanvasForm;
 var lat;
 var lng;
 var pozzy;
+var contentWindow;
+var maxZoom;
 
 function initialize() {
-  // set up default map options
-  var lat = 20;
-  var lng = 60;
+  // set up default map options, and jquery selectors
+  lat = 20;
+  lng = 60;
   mapCanvas = document.getElementById("map-canvas");
   var maxZoom = 2;
-
+  contentWindow = $('#content-window');
 
 
   var styles =  [
@@ -65,7 +67,7 @@ function initialize() {
 
   var mapOptions = {
     center: new google.maps.LatLng(lat, lng),
-    zoom: 2,
+    zoom: maxZoom,
     mapTypeControl: false,
     panControl: false,
     zoomControl: false,
@@ -77,9 +79,6 @@ function initialize() {
   map = new google.maps.Map(mapCanvas,
     mapOptions);
 
-  // instantiate the infowindow 
-  infowindow = new google.maps.InfoWindow({
-  });
 
   // add listener for any zoom changes and set max zoom
   google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -88,8 +87,9 @@ function initialize() {
 
   // add listener for any info window open, if click anywhere outside window it closes
   google.maps.event.addListener(map, 'click', function() {
-    if (isInfoWindowOpen(infowindow)){
-      infowindow.close();
+    if (contentWindow.hasClass('slideInRight')){
+      contentWindow.toggleClass('slideInRight slideOutRight');
+      resetZoom(map, maxZoom, map.getZoom());
     }
   });
 
@@ -163,9 +163,9 @@ function addContent(issue) {
 }
 
 function openContentWindow() {
-  var contentWindow = $('#content-window');
-  contentWindow.addClass('animated slideInRight');
+  contentWindow.toggleClass('slideInRight slideOutRight');
   contentWindow.css('display', 'block');
+  // contentWindow.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', contentWindow.removeClass('animated slideInRight'));
   
 }
 
@@ -212,6 +212,19 @@ function createMarker(issue) {
     addContent(issue);
 
   });
+}
+
+function resetZoom(map, maxZoom, current){
+  if (current < maxZoom) {
+    return;
+  } else {
+    // recursive loop until zoomed out
+    var z = google.maps.event.addListener(map, 'zoom_changed', function(event){
+      google.maps.event.removeListener(z);
+      resetZoom(map, maxZoom, current - 1);
+    });
+    setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+  } 
 }
 
 // the smooth zoom function
