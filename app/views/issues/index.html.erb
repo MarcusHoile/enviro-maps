@@ -3,7 +3,7 @@
 <% end %>
 <div id="map-container">
 	<div id="content-window" class="animated slideOutRight">
-		<div id="marker-title" class="marker-content"></div>
+		<h1 id="marker-title" class="marker-content"></h1>
 		<div id="marker-description" class="marker-content"></div>
 		<div id="marker-url" class="marker-content"></div>
 	</div>
@@ -12,9 +12,11 @@
 </div>
 
 <script type="text/javascript">
+// var icon = <%= image_path "radial-blue.png" %>;
   $(document).ready(function(){
     initialize();
     fetchIssues();
+
     // setBounds();
   });
 </script>

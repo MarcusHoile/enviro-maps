@@ -44,7 +44,7 @@ function initialize() {
         { "color": "#000000" }
       ]
     },{
-      "featureType": "landscape.natural",
+      "featureType": "landscape",
       "stylers": [
         { "color": "#0A1C28" }
       ]
@@ -61,7 +61,50 @@ function initialize() {
         { "color": "#ffffff" }
       ]
     },{
-    }
+    "featureType": "administrative.province",
+    "elementType": "labels.text",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.locality",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+    },{
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "color": "#0A1C28" },
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "poi",
+    "stylers": [
+      { "color": "#0A1C28" }
+    ]
+  }, {
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
   ];
 
   var mapOptions = {
@@ -95,7 +138,7 @@ function initialize() {
   $('#reset-zoom').on('click', function() {
     resetZoom(map, maxZoom, map.getZoom());
   })
-}
+} // ------------------ end of Initialize --------------------
 
 
 function setBounds() {
@@ -104,7 +147,6 @@ function setBounds() {
      new google.maps.LatLng(80, 180), 
      new google.maps.LatLng(-80, -179)
    );
-
    // Listen for the dragend event
    google.maps.event.addListener(map, 'dragend', function() {
      if (strictBounds.contains(map.getCenter())) return;
@@ -125,7 +167,8 @@ function setBounds() {
 
      map.setCenter(new google.maps.LatLng(y, x));
    });
-}
+} // --------------- end of Set Bounds ------------------
+
 
 function mapForm() {
   // adds listener for when a user marks a location for an issue
@@ -143,12 +186,12 @@ function mapForm() {
       getMarkerPosition(event);
     });
   });
-}
+} // ---------- end of map form -------------
 
 function addContent(issue) {
   $('#marker-title').html(issue.title);
   $('#marker-description').html(issue.description);
-  $('#marker-url').html(issue.url);
+  $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
 }
 
 function openContentWindow() {
@@ -175,40 +218,27 @@ function fetchIssues() {
 
 function createMarker(issue) {
   var location = new google.maps.LatLng(issue.lat, issue.lng);
-  var goldStar = {
-    path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-    fillColor: 'yellow',
-    fillOpacity: 0.8,
-    scale: 1,
-    strokeColor: 'gold',
-    strokeWeight: 14
-  };
   marker = new google.maps.Marker({
     map: map,
     position: location,
-    icon: goldStar
+    icon: "/assets/radial-blue-20.png"
   });
-
   // add listener for when user clicks a marker open content window with content
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
-
     // move to location left a few degreees for the content window
     lat = this.getPosition().lat();
     lng = (this.getPosition().lng() + 12);
     var location = new google.maps.LatLng(lat, lng);
-    
-
     // center and zoom in on location
+    openContentWindow();
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
-    openContentWindow();
-
     // insert issue content to content window
     addContent(issue);
-
   });
-}
+} // ----------------- end of create marker ------------------------
+
 
 function resetZoom(map, maxZoom, current){
   if (current < maxZoom) {
@@ -223,7 +253,7 @@ function resetZoom(map, maxZoom, current){
   } 
 }
 
-// the smooth zoom function
+
 function smoothZoom (map, max, current) {
   if (current >= max) {
     return;

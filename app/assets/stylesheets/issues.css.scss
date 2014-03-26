@@ -12,15 +12,21 @@ body { height: 100%; margin: 0; padding: 0px }
 #content-window {
 	position:fixed;
 	right:0px;
-	height:80%;
+	height:70%;
 	width: 55%;
-	background: rgba(255, 0, 0, 0.5);
+	background: rgba(21,130,91, 0.7);
 	z-index:100000;
 	display:none;
-	border: solid 2px red;
+	border: solid 2px #289C77;
 	border-right:none;
 	margin-top: 40px;
-	color:white;
+	color:#fff;
+	padding: 20px;
+}
+
+.marker-content {
+	border: solid 1px white;
+	padding: 10px;
 }
 
 
@@ -30,11 +36,6 @@ body { height: 100%; margin: 0; padding: 0px }
 }
 
 #map-canvas { height: 100% }
-
-#info-content {
-	height: 200px;
-	width: 400px;
-}
 
 #map-container-form {
 	height: 100%;
@@ -78,8 +79,14 @@ li {
 
 }
 
-li a {
+a {
+	color: #fff;
+}
+
+nav a {
 	text-decoration:none;
 	color: #000;
 	font-size:14px;
 }
+
+
