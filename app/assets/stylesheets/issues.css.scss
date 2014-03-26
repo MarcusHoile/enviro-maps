@@ -25,7 +25,6 @@ body { height: 100%; margin: 0; padding: 0px }
 }
 
 .marker-content {
-	border: solid 1px white;
 	padding: 10px;
 }
 
@@ -36,6 +35,33 @@ body { height: 100%; margin: 0; padding: 0px }
 }
 
 #map-canvas { height: 100% }
+
+#form-container {
+	margin: 10px 20px;
+	float:left;
+	min-width: 400px;
+}
+/*
+input, textarea {
+	width: 100%;
+}
+
+input[type="submit"]
+{
+  height: 80px;
+  padding: 200px;
+}
+*/
+
+#nav-margin {
+	margin-top: 60px;
+}
+
+.alert {
+	margin: 0;
+	padding: 0;
+}
+
 
 #map-container-form {
 	height: 100%;
@@ -88,5 +114,6 @@ nav a {
 	color: #000;
 	font-size:14px;
 }
+
 
 

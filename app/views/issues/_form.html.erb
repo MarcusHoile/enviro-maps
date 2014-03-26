@@ -2,45 +2,52 @@
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOAgUCn6GQzKlnMwFmO2kBvG_S3JRD38&libraries=places&sensor=false" %>
 <% end %>
 
-<%= form_for([current_user, @issue], html: {id: "form"}) do |f| %>
-  <% if @issue.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
 
-      <ul>
-      <% @issue.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+
+<div id="form-container">
+  <div class="row form">
+  <%= form_for([current_user, @issue], html: {id: "form"}) do |f| %>
+    <% if @issue.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+        <ul>
+        <% @issue.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_area :description, size: "60x12", :class => "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :url, "Link to more information" %><br>
+      <%= f.text_field :url, :class => "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :organisation, "Owner of Website" %><br>
+      <%= f.text_field :organisation, :class => "form-control" %>
+
+    </div>
+    <div class="field">
+      <%= f.hidden_field :lat %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :lng %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Submit issue", :class => "form-control" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :url, "Link to more information" %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :organisation, "Owner of Website" %><br>
-    <%= f.text_field :organisation %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :lat %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :lng %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Submit issue", id: "form-button" %>
-  </div>
-<% end %>
+</div>
+</div> <!-- end of form container -->
 
 <div id="map-container">
   <div id="map-canvas"/>
