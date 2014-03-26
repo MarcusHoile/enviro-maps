@@ -4,7 +4,9 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.json
   def index
-    @assets = Asset.all
+    @issue = Issue.find(params[:issue_id])
+    @assets = @issue.assets
+
   end
 
   # GET /assets/1

@@ -6,6 +6,9 @@ var lat;
 var lng;
 var contentWindow;
 var maxZoom;
+// var issue = gon.issue;
+var data;
+var imageTest;
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -188,11 +191,38 @@ function mapForm() {
   });
 } // ---------- end of map form -------------
 
+function getImages(issue){
+    var params = '{"field1": "value1", "field2: "value2"}'; 
+    $.get('/controller/bar', params, function(data){ 
+      alert(data); 
+    });
+
+    
+  $.ajax({
+    type: "GET",
+    url: '/issues/' + issue.id + '/assets',
+    dataType: "JSON",
+    success: function(images) {
+    
+      _.each(images, function(image){
+        console.log(image);
+      });
+      // $.each((images), function(index, image) {
+      //   console.log(image);
+      //   // $('#marker-images').append('<div>' + image.url + '</div>')
+      //   imageTest = image;
+      // });
+      
+    }
+  });
+}
+
 function addContent(issue) {
   $('#marker-title').html(issue.title);
   $('#marker-description').html(issue.description);
   $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
-  var asset = gon.asset;
+  console.log('this is add content' + issue.id);
+  getImages(issue);
 }
 
 function openContentWindow() {
@@ -202,7 +232,6 @@ function openContentWindow() {
 
 
 function getMarkerPosition(event){
-  console.log(event.latLng);
   var lat = event.latLng.lat();
   var lng = event.latLng.lng();
   $('#issue_lat').val(lat);
@@ -213,7 +242,9 @@ function fetchIssues() {
   var issues = gon.issues
   // Create a marker on the map for each issue 
   for (var i = 0; i < issues.length; i++) {
+    
     createMarker(issues[i]);
+    console.log(issues[i]);
   }
 }
 
@@ -236,6 +267,7 @@ function createMarker(issue) {
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
     // insert issue content to content window
+    console.log('this is create marker' + issue);
     addContent(issue);
   });
 } // ----------------- end of create marker ------------------------

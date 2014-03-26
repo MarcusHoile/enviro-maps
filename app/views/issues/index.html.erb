@@ -6,7 +6,9 @@
 		<h1 id="marker-title" class="marker-content"></h1>
 		<div id="marker-description" class="marker-content"></div>
 		<div id="marker-url" class="marker-content"></div>
-    <div id="marker-images" class="marker-content"><%= image_tag @asset.image.url %></div>
+    <div id="marker-images" class="marker-content">
+      <%= image_tag @asset.image.url(:medium) %>
+    </div>
 	</div>
   <div id="map-canvas">
   </div>

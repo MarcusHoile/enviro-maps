@@ -43,18 +43,6 @@ ActiveRecord::Schema.define(version: 20140326113811) do
 
   add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
 
-  create_table "markers", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "url"
-    t.string   "status"
-    t.string   "organisation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "lat"
-    t.decimal  "lng"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

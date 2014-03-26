@@ -5,7 +5,8 @@ class IssuesController < ApplicationController
 
 	def index
 	  gon.issues = Issue.all
-    @asset = Asset.first
+    @asset = Asset.last
+    gon.issue = Issue.first
 	  
 	end
 
