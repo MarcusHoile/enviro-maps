@@ -3,15 +3,15 @@
 <% end %>
 <div id="map-container">
   <div id="zoom-control">
-    <button id="zoom-out" class="btn">-</button>
-    <button id="zoom-in" class="btn">+</button>
+    <button id="zoom-out" class="btn zoom">-</button>
+    <button id="zoom-in" class="btn zoom">+</button>
   </div>
 	<div id="content-window" class="animated slideOutRight">
 		<h1 id="marker-title" class="marker-content"></h1>
 		<div id="marker-description" class="marker-content"></div>
 		<div id="marker-url" class="marker-content"></div>
-    <div id="marker-images" class="marker-content">
-      <%= image_tag @asset.image.url(:medium) %>
+    <div id="images-window">
+      <div id="marker-images" class="marker-content"></div>
     </div>
 	</div>
   <div id="map-canvas">

@@ -14,7 +14,7 @@ body { height: 100%; margin: 0; padding: 0px }
 	right:0px;
 	height:70%;
 	width: 55%;
-	background: rgba(0,0,0, 0.9);
+	background: rgba(0,0,0, 0.6);
 	z-index:100000;
 	display:none;
 	border: solid 2px #289C77;
@@ -28,6 +28,20 @@ body { height: 100%; margin: 0; padding: 0px }
 	padding: 10px;
 }
 
+#images-window {
+  position: relative;
+  width: 100%;
+  height: 533px;
+  margin: auto;
+  overflow: hidden;
+}
+
+#marker-images {
+  position: absolute;
+  display: inline-block;
+  width: 2400px;
+  height: 100%;
+}
 
 #map-container {
 	height: 100%;
@@ -41,17 +55,17 @@ body { height: 100%; margin: 0; padding: 0px }
 	float:left;
 	min-width: 400px;
 }
-/*
-input, textarea {
-	width: 100%;
+
+#zoom-control {
+	position:fixed;
+	left:10px;
+	top:80px;
+	z-index:2;
 }
 
-input[type="submit"]
-{
-  height: 80px;
-  padding: 200px;
+.zoom {
+	border:solid 1px #00ADEF;
 }
-*/
 
 #nav-margin {
 	margin-top: 60px;

@@ -217,10 +217,10 @@ function mapForm() {
 } // ---------- end of map form -------------
 
 function getImages(issue){
-    var params = '{"field1": "value1", "field2: "value2"}'; 
-    $.get('/controller/bar', params, function(data){ 
-      alert(data); 
-    });
+    // var params = '{"title": "value1", "description: "value2"}'; 
+    // $.get('/issues/' + issue.id + '/assets', params, function(data){ 
+    //   alert(data); 
+    // });
 
 
   $.ajax({
@@ -228,15 +228,10 @@ function getImages(issue){
     url: '/issues/' + issue.id + '/assets',
     dataType: "JSON",
     success: function(images) {
-    
-      _.each(images, function(image){
+      $.each((images), function(index, image) {
         console.log(image);
+        $('#marker-images').append('<img src="'+ image + '">');
       });
-      // $.each((images), function(index, image) {
-      //   console.log(image);
-      //   // $('#marker-images').append('<div>' + image.url + '</div>')
-      //   imageTest = image;
-      // });
       
     }
   });
@@ -246,7 +241,6 @@ function addContent(issue) {
   $('#marker-title').html(issue.title);
   $('#marker-description').html(issue.description);
   $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
-  console.log('this is add content' + issue.id);
   getImages(issue);
 }
 
@@ -269,7 +263,6 @@ function fetchIssues() {
   for (var i = 0; i < issues.length; i++) {
     
     createMarker(issues[i]);
-    console.log(issues[i]);
   }
 }
 
@@ -278,7 +271,7 @@ function createMarker(issue) {
   marker = new google.maps.Marker({
     map: map,
     position: location,
-    icon: "/assets/radial-orange-25.png"
+    icon: "/assets/radial-red-25.png"
   });
   // add listener for when user clicks a marker open content window with content
   // zoom in to location
@@ -292,7 +285,6 @@ function createMarker(issue) {
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
     // insert issue content to content window
-    console.log('this is create marker' + issue);
     addContent(issue);
   });
 } // ----------------- end of create marker ------------------------

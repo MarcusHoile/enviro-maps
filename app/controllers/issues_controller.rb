@@ -7,7 +7,10 @@ class IssuesController < ApplicationController
 	  gon.issues = Issue.all
     @asset = Asset.last
     gon.issue = Issue.first
-	  
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render json: @issues }
+    # end
 	end
 
   def show

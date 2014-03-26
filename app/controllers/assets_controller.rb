@@ -6,7 +6,15 @@ class AssetsController < ApplicationController
   def index
     @issue = Issue.find(params[:issue_id])
     @assets = @issue.assets
+    @image_urls = []
+    @assets.each do |asset|
+      @image_urls << asset.image.url(:medium)
+    end
 
+    respond_to do |format|
+      format.html
+      format.json { render json: @image_urls }
+    end
   end
 
   # GET /assets/1
