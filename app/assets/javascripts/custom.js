@@ -249,7 +249,7 @@ function resetZoom(map, maxZoom, current){
       google.maps.event.removeListener(z);
       resetZoom(map, maxZoom, current - 1);
     });
-    setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+    setTimeout(function(){map.setZoom(current)}, 120); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
 }
 
@@ -263,7 +263,7 @@ function smoothZoom (map, max, current) {
       google.maps.event.removeListener(z);
       smoothZoom(map, max, current + 1);
     });
-    setTimeout(function(){map.setZoom(current)}, 40); // 80ms is what I found to work well on my system -- it might not work well on all systems
+    setTimeout(function(){map.setZoom(current)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
 }  
 

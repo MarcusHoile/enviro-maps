@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
 
+# file manager for images
+gem "paperclip", "~> 4.1"
+
 gem 'bootstrap-sass'
 
 # pass rails variables to javascript
