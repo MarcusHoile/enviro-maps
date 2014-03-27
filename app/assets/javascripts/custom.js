@@ -15,6 +15,7 @@ var autocomplete;
 var icon = "/assets/radial-red-25.png"
 var bullseye = "/assets/bullseye.png"
 var search;
+var carousel;
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -25,6 +26,10 @@ function initialize() {
   contentWindow = $('#content-window');
   markerImages = $('#marker-images');
   markerTags = $('#marker-tags');
+  // setup carousel
+  carousel = $('#carousel');
+  var next = $('#next').on('click', slideLeft);
+  var previous = $('#previous').on('click', slideRight);
 
   // set zoom controls
   $('#zoom-out').on('click', function(){
@@ -184,8 +189,11 @@ function initialize() {
       resetMap(map, maxZoom, map.getZoom()); 
     }
     resetMap(map, maxZoom, map.getZoom());
-    markers[0].setMap(null);
-    markers = []; 
+    if (markers.length > 0) {
+      markers[0].setMap(null);
+      markers = []; 
+    }
+    
   });
 
   // set the bounds of the map so that it stays in the browser
@@ -421,6 +429,8 @@ function resetMap(map, maxZoom, current){
   if (current == maxZoom) {
     lastClicked = {};
     search.toggle();
+    var center = new google.maps.LatLng(lat, lng);
+    map.panTo(center);
   }
   
 }
@@ -450,6 +460,38 @@ function editMarker(issue) {
   google.maps.event.addListener(marker, 'dragend', function(event) {
     getMarkerPosition(event);
   });
+}
+
+function slideLeft(){
+
+  // setup the initial values for the variables that are global
+carousel.style.marginLeft = 0;
+timer = null;
+timeDelay = 30;
+// distance for banners to get back to begin
+  // first check if at end point
+  // if (parseInt(carousel.style.marginLeft) < 0) {
+    // set an interval so slide smoothly
+    timer = setInterval(slider, timeDelay);
+    // have sliding in its own function so that you can stop interval
+    function slider() { 
+      // loop back to the beginning once you've hit the last banner 
+      if (parseInt(carousel.style.marginLeft) === 0) {
+        // need to stop current interval so this function doesnt run again.
+        clearInterval(timer);
+        // new function to reset the margin position
+        timer2 = setInterval(resetSlider, timeDelay);
+      } else {
+        var bannerPosition = parseInt(carousel.style.marginLeft);
+        var newBannerPosition = bannerPosition + 100;
+        carousel.style.marginLeft = newBannerPosition + "px";
+        // when the margin is divisible by banner width, stop interval
+        if ((parseInt(carousel.style.marginLeft) % imgWidth) === 0) {
+          clearInterval(timer);
+        }
+      }
+
+    }
 }
 
 

@@ -26,14 +26,14 @@
       <%= f.text_field :title, :class => "form-control" %>
     </div>
     <label for="">Where</label>
-    <input type="text" id="autocomplete" placeholder="Enter a location or place a marker on the map">
+    <input type="text" class="form-control" id="autocomplete" placeholder="Enter a location or place a marker on the map">
     <div class="form-group">
       <%= f.label :description %><br>
       <%= f.text_area :description, size: "60x12", :class => "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :tag_list, 'Tags (separated by commas)' %>
-      <%= f.text_field :tag_list, :placeholder => "tag your post eg 'ruby, rails'", :class => "form-control"  %>
+      <%= f.text_field :tag_list, :placeholder => "eg 'climate change, extinction, pollution...'", :class => "form-control"  %>
     </div>
     <div class="field">
       <%= f.label :url, "Link to more information" %><br>

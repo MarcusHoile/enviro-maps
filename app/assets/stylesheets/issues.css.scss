@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 html { height: 100% }
-body { height: 100%; margin: 0; padding: 0px; background:#000; }
+body { height: 100%; margin: 0; padding: 0px; background:#000; color:#fff; }
 
 .alert {
 	margin-top:60px;
@@ -11,6 +11,29 @@ body { height: 100%; margin: 0; padding: 0px; background:#000; }
 
 form {
 	padding:10px;
+}
+
+.carousel-direction{
+  position: absolute;
+  left: 10px;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  font-size: 60px;
+  font-weight: 100;
+  line-height: 30px;
+  text-align: center;
+  background: #222222;
+  border: 3px solid #ffffff;
+  opacity: 0.5;
+  border-radius: 23px;
+  z-index: 5;
+  text-decoration: none;
+}
+#next {
+  right: 15px;
+  left: auto;
 }
 
 span {
@@ -42,8 +65,8 @@ a:hover {
 	width: 100%;
 	padding: 5px;
 	margin-bottom: 15px;
-	background:#000;
-	border: solid 1px #00ADEF;
+	background-color: #000;
+
 }
 
 #search {
@@ -118,9 +141,12 @@ a:hover {
 #map-canvas { height: 100% }
 
 #form-container {
-	margin: 10px 20px;
+	padding: 10px 20px;
 	float:left;
 	min-width: 400px;
+	background:#0A1C28;
+	border-right: #00ADEF solid 1px;
+	color: #fff;
 }
 
 #zoom-control {
@@ -160,7 +186,7 @@ a:hover {
 ul {
 	margin:0 auto;
 	padding:10px;
-	max-width:900px;
+	max-width:1000px;
 }
 nav {
 	position: fixed;
@@ -170,7 +196,6 @@ nav {
 	top: 0;
 	z-index: 100;
 	margin:0;
-	/*padding:3px;*/
 	background: #000;
 	border-bottom: solid 1px #00ADEF;
 }
@@ -184,6 +209,8 @@ li {
 	border-radius:5px;
 	text-align:center;
 }
+
+
 
 a {
 	color: #fff;
