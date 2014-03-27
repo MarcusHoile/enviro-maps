@@ -31,6 +31,8 @@ gem 'devise'
 
 gem 'acts-as-taggable-on'
 
+
+
 # file manager for images
 gem "paperclip", "~> 4.1"
 
@@ -50,6 +52,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
 	gem 'simplecov' # testing coverage checker
+end
+
+group :production do
+	gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password
