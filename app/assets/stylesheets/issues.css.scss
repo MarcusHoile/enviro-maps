@@ -33,6 +33,16 @@ form {
 	z-index:3;
 }
 
+#marker-animation {
+	height:40px;
+	width:40px;
+	background: red;
+	position: fixed;
+	top: 397px;
+	left:448px;
+	z-index:4;
+}
+
 #content-window {
 	position:fixed;
 	right:0px;

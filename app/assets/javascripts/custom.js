@@ -167,7 +167,7 @@ function initialize() {
   google.maps.event.addListener(map, 'click', function() {
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
-      resetZoom(map, maxZoom, map.getZoom());
+      resetMap(map, maxZoom, map.getZoom());
     }
   });
     // add reset zoom function to nav bar button
@@ -175,9 +175,11 @@ function initialize() {
     event.preventDefault();
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
-      resetZoom(map, maxZoom, map.getZoom());
+      resetMap(map, maxZoom, map.getZoom());
     }
-    resetZoom(map, maxZoom, map.getZoom());
+    resetMap(map, maxZoom, map.getZoom());
+    markers[0].setMap(null);
+    markers = []; 
   });
 
   // set the bounds of the map so that it stays in the browser
@@ -249,19 +251,28 @@ function addAutocomplete(type){
     if (type == "form") {
       addMarkerForm();
     } else {
-      var place = autocomplete.getPlace();
-      map.panTo(place.geometry.location);
-      // map.setZoom(5);
-      smoothZoom(map, 6, map.getZoom());
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location,
-        icon: bullseye
-      });
+      locatePlace();
     }
   });
+}
 
+function locatePlace() {
+  if (markers.length > 0) {
+    markers[0].setMap(null);
+    markers = [];
+  }
 
+  var place = autocomplete.getPlace();
+  map.panTo(place.geometry.location);
+  smoothZoom(map, 6, map.getZoom());
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+    icon: bullseye
+  });
+  // store marker in array, update the latlng hidden values 
+  markers.push(marker);
+  
 }
 
 function addMarkerForm() {
@@ -346,14 +357,22 @@ function createMarker(issue) {
     icon: icon
   });
   // add listener for when user clicks a marker open content window with content
+
   // zoom in to location
   google.maps.event.addListener(marker, 'click', function(event) {
     // move to location left a few degreees for the content window
     lat = this.getPosition().lat();
     lng = (this.getPosition().lng() + 12);
-    // map.panTo(lat,lng);
-    var location = new google.maps.LatLng(lat, lng);
+
+    // check to see if any content windows are open
+    if (contentWindow.hasClass('slideInRight')){
+      console.log('content window is open!!')
+      contentWindow.toggleClass('slideInRight slideOutRight');
+    }
+    
     // center and zoom in on location
+    // check to see if animation has ended
+    var location = new google.maps.LatLng(lat, lng);
     openContentWindow();
     map.panTo(location);
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
@@ -363,23 +382,20 @@ function createMarker(issue) {
     if (lastClicked != issue) {
       addContent(issue);
     }
-    console.log('this is the marker title ' + issue.title);
-    // console.log('this is the last clicked ' + lastClicked)
     // store the marker that was clicked
     lastClicked = issue;
-    console.log('this is the UPDATED last clicked' + lastClicked.title)
   });
 } // ----------------- end of create marker ------------------------
 
 
-function resetZoom(map, maxZoom, current){
+function resetMap(map, maxZoom, current){
   if (current < maxZoom) {
     return;
   } else {
     // recursive loop until zoomed out
     var z = google.maps.event.addListener(map, 'zoom_changed', function(event){
       google.maps.event.removeListener(z);
-      resetZoom(map, maxZoom, current - 1);
+      resetMap(map, maxZoom, current - 1);
     });
     setTimeout(function(){map.setZoom(current)}, 120); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
