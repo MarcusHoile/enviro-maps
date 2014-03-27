@@ -168,6 +168,7 @@ function initialize() {
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
       resetMap(map, maxZoom, map.getZoom());
+      $( "#search" ).toggle();
     }
   });
     // add reset zoom function to nav bar button
@@ -176,6 +177,7 @@ function initialize() {
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
       resetMap(map, maxZoom, map.getZoom());
+      $( "#search" ).toggle();
     }
     resetMap(map, maxZoom, map.getZoom());
     markers[0].setMap(null);
@@ -329,6 +331,8 @@ function addContent(issue) {
 function openContentWindow() {
   contentWindow.toggleClass('slideInRight slideOutRight');
   contentWindow.css('display', 'block');
+  $( "#search" ).toggle();
+
 }
 
 
@@ -366,8 +370,8 @@ function createMarker(issue) {
 
     // check to see if any content windows are open
     if (contentWindow.hasClass('slideInRight')){
-      console.log('content window is open!!')
       contentWindow.toggleClass('slideInRight slideOutRight');
+      $( "#search" ).toggle();
     }
     
     // center and zoom in on location
