@@ -20,6 +20,8 @@ function initialize() {
   var maxZoom = 2;
   contentWindow = $('#content-window');
   markerImages = $('#marker-images');
+
+  // set zoom controls
   $('#zoom-out').on('click', function(){
     var zoom = map.getZoom()
     map.setZoom(zoom - 1);
@@ -27,7 +29,8 @@ function initialize() {
   $('#zoom-in').on('click', function(){
     var zoom = map.getZoom()
     map.setZoom(zoom + 1);
-  })
+  });
+
 
 
   var styles =  [
@@ -165,11 +168,16 @@ function initialize() {
       resetZoom(map, maxZoom, map.getZoom());
     }
   });
-
-  // add reset zoom function to nav bar button
-  $('#reset-zoom').on('click', function() {
+    // add reset zoom function to nav bar button
+  $('#reset-map').on('click', function(event) {
+    event.preventDefault();
+    if (contentWindow.hasClass('slideInRight')){
+      contentWindow.toggleClass('slideInRight slideOutRight');
+      resetZoom(map, maxZoom, map.getZoom());
+    }
     resetZoom(map, maxZoom, map.getZoom());
-  })
+  });
+
 } // ------------------ end of Initialize --------------------
 
 
@@ -309,6 +317,7 @@ function resetZoom(map, maxZoom, current){
     });
     setTimeout(function(){map.setZoom(current)}, 120); // 80ms is what I found to work well on my system -- it might not work well on all systems
   } 
+  lastClicked = {};
 }
 
 
