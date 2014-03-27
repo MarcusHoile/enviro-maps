@@ -248,7 +248,7 @@ function addAutocomplete(type){
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     {
-      types: ['(cities)'],
+      // types: ['(cities)'],
       
     });
   places = new google.maps.places.PlacesService(map);
