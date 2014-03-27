@@ -6,9 +6,11 @@ var lat;
 var lng;
 var contentWindow;
 var maxZoom;
+var lastClicked;
 // var issue = gon.issue;
 var data;
 var imageTest;
+var markerImages;
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -17,6 +19,7 @@ function initialize() {
   mapCanvas = document.getElementById("map-canvas");
   var maxZoom = 2;
   contentWindow = $('#content-window');
+  markerImages = $('#marker-images');
   $('#zoom-out').on('click', function(){
     var zoom = map.getZoom()
     map.setZoom(zoom - 1);
@@ -25,6 +28,7 @@ function initialize() {
     var zoom = map.getZoom()
     map.setZoom(zoom + 1);
   })
+
 
   var styles =  [
     {
@@ -217,14 +221,15 @@ function mapForm() {
 } // ---------- end of map form -------------
 
 function getImages(issue){
+  // clear any existing images from page
+  markerImages.empty();
   $.ajax({
     type: "GET",
     url: '/issues/' + issue.id + '/assets',
     dataType: "JSON",
     success: function(images) {
       $.each((images), function(index, image) {
-        console.log(image);
-        $('#marker-images').append('<img src="'+ image + '">');
+        markerImages.append('<img src="'+ image + '">');
       });
       
     }
@@ -262,7 +267,7 @@ function fetchIssues() {
 
 function createMarker(issue) {
   var location = new google.maps.LatLng(issue.lat, issue.lng);
-  var lastClicked;
+  
   marker = new google.maps.Marker({
     map: map,
     position: location,
@@ -281,11 +286,14 @@ function createMarker(issue) {
     map.setCenter(location);
     // insert issue content to content window
     // check to see if content is already there ie if last clicked
-    if (lastClicked != marker) {
+    if (lastClicked != issue) {
       addContent(issue);
     }
+    console.log('this is the marker title ' + issue.title);
+    // console.log('this is the last clicked ' + lastClicked)
     // store the marker that was clicked
-    lastClicked = marker;
+    lastClicked = issue;
+    console.log('this is the UPDATED last clicked' + lastClicked.title)
   });
 } // ----------------- end of create marker ------------------------
 
