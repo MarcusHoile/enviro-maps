@@ -217,12 +217,6 @@ function mapForm() {
 } // ---------- end of map form -------------
 
 function getImages(issue){
-    // var params = '{"title": "value1", "description: "value2"}'; 
-    // $.get('/issues/' + issue.id + '/assets', params, function(data){ 
-    //   alert(data); 
-    // });
-
-
   $.ajax({
     type: "GET",
     url: '/issues/' + issue.id + '/assets',
@@ -268,6 +262,7 @@ function fetchIssues() {
 
 function createMarker(issue) {
   var location = new google.maps.LatLng(issue.lat, issue.lng);
+  var lastClicked;
   marker = new google.maps.Marker({
     map: map,
     position: location,
@@ -285,7 +280,12 @@ function createMarker(issue) {
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     map.setCenter(location);
     // insert issue content to content window
-    addContent(issue);
+    // check to see if content is already there ie if last clicked
+    if (lastClicked != marker) {
+      addContent(issue);
+    }
+    // store the marker that was clicked
+    lastClicked = marker;
   });
 } // ----------------- end of create marker ------------------------
 
