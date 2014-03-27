@@ -331,11 +331,13 @@ function createMarker(issue) {
     // move to location left a few degreees for the content window
     lat = this.getPosition().lat();
     lng = (this.getPosition().lng() + 12);
+    // map.panTo(lat,lng);
     var location = new google.maps.LatLng(lat, lng);
     // center and zoom in on location
     openContentWindow();
+    map.panTo(location);
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
-    map.setCenter(location);
+    
     // insert issue content to content window
     // check to see if content is already there ie if last clicked
     if (lastClicked != issue) {
