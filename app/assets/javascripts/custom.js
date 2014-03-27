@@ -12,6 +12,7 @@ var imageTest;
 var markerImages;
 var autocomplete;
 var icon = "/assets/radial-red-25.png"
+var bullseye = "/assets/bullseye.png"
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -231,20 +232,39 @@ function mapForm() {
     });
   });
 
-  autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-      {
-        types: ['(cities)'],
-        
-      });
-  places = new google.maps.places.PlacesService(map);
-
-  google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
-
+  addAutocomplete("form");
 
 } // ---------- end of map form -------------
 
-function onPlaceChanged() {
+function addAutocomplete(type){
+  autocomplete = new google.maps.places.Autocomplete(
+    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+    {
+      types: ['(cities)'],
+      
+    });
+  places = new google.maps.places.PlacesService(map);
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function(){
+    if (type == "form") {
+      addMarkerForm();
+    } else {
+      var place = autocomplete.getPlace();
+      map.panTo(place.geometry.location);
+      // map.setZoom(5);
+      smoothZoom(map, 6, map.getZoom());
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: bullseye
+      });
+    }
+  });
+
+
+}
+
+function addMarkerForm() {
   var place = autocomplete.getPlace();
   if (markers.length > 0) {
     markers[0].setMap(null);
@@ -255,10 +275,10 @@ function onPlaceChanged() {
     map.panTo(place.geometry.location);
     map.setZoom(5);
     var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    icon: icon
-  });
+      map: map,
+      position: place.geometry.location,
+      icon: icon
+    });
     // store marker in array, update the latlng hidden values 
     markers.push(marker);
     // getMarkerPosition(place.geometry.location);
