@@ -16,6 +16,8 @@ form {
 span {
 	color: #00ADEF;
 	cursor:pointer;
+	padding:10px;
+	position:relative;
 }
 
 #form-button {
@@ -32,6 +34,9 @@ span {
 	width: 100%;
 	padding: 5px;
 	margin-bottom: 15px;
+	background:#000;
+	border: solid 1px #00ADEF;
+	color: #0A1C28;
 }
 
 #search {
@@ -64,7 +69,7 @@ span {
 	border-right:none;
 	margin-top: 40px;
 	color:#fff;
-	padding: 20px;
+	padding: 10px;
 }
 
 #error_explanation li {
@@ -79,13 +84,14 @@ span {
 }
 
 .marker-content {
-	padding: 10px;
+	padding: 5px 10px;
+	
 }
 
 #images-window {
   position: relative;
   width: 100%;
-  height: 533px;
+  height: 233px;
   margin: auto;
   overflow: hidden;
 }
@@ -174,6 +180,11 @@ li {
 
 a {
 	color: #fff;
+}
+
+ul li, ul li a {
+	background: #000;
+	color: #00ADEF;
 }
 
 nav a {

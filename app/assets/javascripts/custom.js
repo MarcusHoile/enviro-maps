@@ -334,7 +334,7 @@ function getImages(issue){
     dataType: "JSON",
     success: function(images) {
       $.each((images), function(index, image) {
-        markerImages.append('<img src="'+ image + '">');
+        markerImages.append('<img class="marker-image-urls" src="'+ image + '">');
       });
       
     }
