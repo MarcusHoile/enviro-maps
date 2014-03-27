@@ -9,6 +9,22 @@ body { height: 100%; margin: 0; padding: 0px }
 	margin-top:60px;
 }
 
+form {
+	padding:10px;
+}
+
+#form-button {
+	width: 100%;
+	margin-top: 20px;
+}
+
+#autocomplete {
+	margin:5px auto;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
 #content-window {
 	position:fixed;
 	right:0px;
@@ -22,6 +38,17 @@ body { height: 100%; margin: 0; padding: 0px }
 	margin-top: 40px;
 	color:#fff;
 	padding: 20px;
+}
+
+#error_explanation li {
+	background: #E03838;
+	width: 80%;
+	color: #ffffff;
+	margin:5px auto;
+}
+
+#error_explanation h2 {
+	display:none;
 }
 
 .marker-content {

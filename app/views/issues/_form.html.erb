@@ -25,6 +25,8 @@
       <%= f.label :title %><br>
       <%= f.text_field :title, :class => "form-control" %>
     </div>
+    <label for="">Where</label>
+    <input type="text" id="autocomplete" placeholder="Enter a location or place a marker on the map">
     <div class="form-group">
       <%= f.label :description %><br>
       <%= f.text_area :description, size: "60x12", :class => "form-control" %>
@@ -47,7 +49,7 @@
     <div class="actions">
       <%# display differnt copy for button when updating %>
       <% button_text = (@issue.new_record?) ? "Submit Issue" : "Update Issue" %>
-      <button class="btn btn-primary"><%= button_text %></button>
+      <button id="form-button" class="btn btn-primary"><%= button_text %></button>
     </div>
   <% end %>
 </div>

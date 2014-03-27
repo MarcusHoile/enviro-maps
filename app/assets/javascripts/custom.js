@@ -7,10 +7,10 @@ var lng;
 var contentWindow;
 var maxZoom;
 var lastClicked;
-// var issue = gon.issue;
 var data;
 var imageTest;
 var markerImages;
+var autocomplete;
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -178,6 +178,9 @@ function initialize() {
     resetZoom(map, maxZoom, map.getZoom());
   });
 
+  // set the bounds of the map so that it stays in the browser
+  // setBounds();
+
 } // ------------------ end of Initialize --------------------
 
 
@@ -226,7 +229,37 @@ function mapForm() {
       getMarkerPosition(event);
     });
   });
+
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+      {
+        types: ['(cities)'],
+        
+      });
+  places = new google.maps.places.PlacesService(map);
+
+  google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+
+
 } // ---------- end of map form -------------
+
+function onPlaceChanged() {
+  var place = autocomplete.getPlace();
+
+
+  if (place.geometry) {
+    map.panTo(place.geometry.location);
+    map.setZoom(5);
+    var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+    icon: "/assets/radial-red-25.png"
+  });
+  } 
+
+}
+
+
 
 function getImages(issue){
   // clear any existing images from page
