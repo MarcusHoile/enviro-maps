@@ -14,6 +14,7 @@ var markerTags;
 var autocomplete;
 var icon = "/assets/radial-red-25.png"
 var bullseye = "/assets/bullseye.png"
+var search;
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -34,8 +35,11 @@ function initialize() {
     var zoom = map.getZoom()
     map.setZoom(zoom + 1);
   });
-
-
+  search = $('#search');
+  $('span').on('click', function(){
+    resetMap(map, maxZoom, map.getZoom());
+    contentWindow.toggleClass('slideInRight slideOutRight');
+  });
 
   var styles =  [
     {
@@ -169,17 +173,15 @@ function initialize() {
   google.maps.event.addListener(map, 'click', function() {
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
-      resetMap(map, maxZoom, map.getZoom());
-      $( "#search" ).toggle();
+      resetMap(map, maxZoom, map.getZoom()); 
     }
   });
-    // add reset zoom function to nav bar button
+  // add reset zoom function to nav bar button
   $('#reset-map').on('click', function(event) {
     event.preventDefault();
     if (contentWindow.hasClass('slideInRight')){
       contentWindow.toggleClass('slideInRight slideOutRight');
-      resetMap(map, maxZoom, map.getZoom());
-      $( "#search" ).toggle();
+      resetMap(map, maxZoom, map.getZoom()); 
     }
     resetMap(map, maxZoom, map.getZoom());
     markers[0].setMap(null);
@@ -313,7 +315,6 @@ function getTags(issue){
     url: '/issues/' + issue.id,
     dataType: "JSON",
     success: function(tags) {
-      console.log(tags);
       $.each((tags), function(index, tag) {
         markerTags.append('<li>'+ tag + '</li>');
       });
@@ -346,13 +347,6 @@ function addContent(issue) {
   $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
   getImages(issue);
   getTags(issue);
-}
-
-function openContentWindow() {
-  contentWindow.toggleClass('slideInRight slideOutRight');
-  contentWindow.css('display', 'block');
-  $( "#search" ).toggle();
-
 }
 
 
@@ -389,15 +383,16 @@ function createMarker(issue) {
     lng = (this.getPosition().lng() + 12);
 
     // check to see if any content windows are open
-    if (contentWindow.hasClass('slideInRight')){
-      contentWindow.toggleClass('slideInRight slideOutRight');
-      $( "#search" ).toggle();
+    contentWindow.toggleClass('slideInRight slideOutRight');
+    if (contentWindow.css('display', 'none')){
+      contentWindow.css('display', 'block');
     }
+      
     
     // center and zoom in on location
     // check to see if animation has ended
     var location = new google.maps.LatLng(lat, lng);
-    openContentWindow();
+    search.toggle();
     map.panTo(location);
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     
@@ -422,8 +417,12 @@ function resetMap(map, maxZoom, current){
       resetMap(map, maxZoom, current - 1);
     });
     setTimeout(function(){map.setZoom(current)}, 120); // 80ms is what I found to work well on my system -- it might not work well on all systems
-  } 
-  lastClicked = {};
+  }
+  if (current == maxZoom) {
+    lastClicked = {};
+    search.toggle();
+  }
+  
 }
 
 
