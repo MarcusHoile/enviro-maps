@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
 
+gem 'acts-as-taggable-on'
+
 # file manager for images
 gem "paperclip", "~> 4.1"
 
