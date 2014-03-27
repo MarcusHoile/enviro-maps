@@ -257,9 +257,15 @@ function onPlaceChanged() {
     var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location,
-    icon: "/assets/radial-red-25.png"
+    icon: icon
   });
+    // store marker in array, update the latlng hidden values 
     markers.push(marker);
+    // getMarkerPosition(place.geometry.location);
+    var lat = place.geometry.location.lat();
+    var lng = place.geometry.location.lng();
+    $('#issue_lat').val(lat);
+    $('#issue_lng').val(lng);
   } 
 
 }
