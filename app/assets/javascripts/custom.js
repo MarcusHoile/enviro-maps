@@ -11,6 +11,7 @@ var data;
 var imageTest;
 var markerImages;
 var autocomplete;
+var icon = "/assets/radial-red-25.png"
 
 function initialize() {
   // set up default map options, and jquery selectors
@@ -221,7 +222,7 @@ function mapForm() {
       markers[0].setMap(null);
       markers = [];
     }  
-    var marker2 = new google.maps.Marker({position: event.latLng, map: map, draggable: true});
+    var marker2 = new google.maps.Marker({position: event.latLng, map: map, icon: icon, draggable: true});
     markers.push(marker2);
     var location = event.latLng;
     getMarkerPosition(event);
@@ -245,7 +246,10 @@ function mapForm() {
 
 function onPlaceChanged() {
   var place = autocomplete.getPlace();
-
+  if (markers.length > 0) {
+    markers[0].setMap(null);
+    markers = [];
+  }  
 
   if (place.geometry) {
     map.panTo(place.geometry.location);
@@ -255,6 +259,7 @@ function onPlaceChanged() {
     position: place.geometry.location,
     icon: "/assets/radial-red-25.png"
   });
+    markers.push(marker);
   } 
 
 }
@@ -312,7 +317,7 @@ function createMarker(issue) {
   marker = new google.maps.Marker({
     map: map,
     position: location,
-    icon: "/assets/radial-red-25.png"
+    icon: icon
   });
   // add listener for when user clicks a marker open content window with content
   // zoom in to location
