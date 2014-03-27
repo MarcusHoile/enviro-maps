@@ -5,15 +5,17 @@ class IssuesController < ApplicationController
 
 	def index
 	  gon.issues = Issue.all
-    @asset = Asset.last
-    gon.issue = Issue.first
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render json: @issues }
-    # end
+    
+
 	end
 
   def show
+    @issue_tags = @issue.tag_list
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @issue_tags }
+    end    
   end
 
   def new

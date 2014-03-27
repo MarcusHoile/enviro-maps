@@ -10,6 +10,7 @@ var lastClicked;
 var data;
 var imageTest;
 var markerImages;
+var markerTags;
 var autocomplete;
 var icon = "/assets/radial-red-25.png"
 var bullseye = "/assets/bullseye.png"
@@ -22,6 +23,7 @@ function initialize() {
   var maxZoom = 2;
   contentWindow = $('#content-window');
   markerImages = $('#marker-images');
+  markerTags = $('#marker-tags');
 
   // set zoom controls
   $('#zoom-out').on('click', function(){
@@ -303,6 +305,23 @@ function addMarkerForm() {
 
 }
 
+function getTags(issue){
+  // clear any existing tags from page
+  markerTags.empty();
+  $.ajax({
+    type: "GET",
+    url: '/issues/' + issue.id,
+    dataType: "JSON",
+    success: function(tags) {
+      console.log(tags);
+      $.each((tags), function(index, tag) {
+        markerTags.append('<li>'+ tag + '</li>');
+      });
+      
+    }
+  }); 
+}
+
 
 
 function getImages(issue){
@@ -326,6 +345,7 @@ function addContent(issue) {
   $('#marker-description').html(issue.description);
   $('#marker-url').html('For more info and ways you can help visit <a href="' + issue.url + '">' + issue.organisation + '</a>');
   getImages(issue);
+  getTags(issue);
 }
 
 function openContentWindow() {
