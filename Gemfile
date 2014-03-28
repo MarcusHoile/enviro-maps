@@ -31,10 +31,11 @@ gem 'devise'
 
 gem 'acts-as-taggable-on'
 
+gem 'carrierwave'
+gem 'cloudinary'
 
-
-# file manager for images
-gem "paperclip", "~> 4.1"
+# # file manager for images
+# gem "paperclip", "~> 4.1"
 
 gem 'bootstrap-sass'
 
