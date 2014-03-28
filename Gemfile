@@ -42,6 +42,8 @@ gem 'bootstrap-sass'
 # pass rails variables to javascript
 gem 'gon'
 
+gem 'minitest-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

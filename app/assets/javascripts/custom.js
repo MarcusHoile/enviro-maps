@@ -323,8 +323,10 @@ function getTags(issue){
     url: '/issues/' + issue.id,
     dataType: "JSON",
     success: function(tags) {
+      console.log(tags)
       $.each((tags), function(index, tag) {
-        markerTags.append('<li>'+ tag + '</li>');
+        console.log(tag);
+        markerTags.append('<li class="tags">'+ tag + '</li>');
       });
       
     }
