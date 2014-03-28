@@ -12,8 +12,8 @@ var imageTest;
 var markerImages;
 var markerTags;
 var autocomplete;
-var icon = "/assets/radial-red-25.png"
-var bullseye = "/assets/bullseye.png"
+var icon = "/assets/radial-red-25.png";
+var bullseye = "/assets/bullseye.png";
 var search;
 var carousel;
 
