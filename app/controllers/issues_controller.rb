@@ -30,7 +30,7 @@ class IssuesController < ApplicationController
     @issue = current_user.issues.new(issue_params)
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to new_issue_asset_path(@issue), notice: 'Issue was successfully created.' }
+        format.html { redirect_to new_issue_image_path(@issue), notice: 'Issue was successfully created.' }
         format.json { render action: 'index', status: :created, location: @issue }
       else
         format.html { render action: 'new' }
