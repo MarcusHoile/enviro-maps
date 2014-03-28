@@ -1,8 +1,9 @@
 EnviroMaps::Application.routes.draw do
+
   devise_for :users
 
   resources :issues do
-  	resources :assets, shallow: true#, path: 'images'
+  	resources :images, shallow: true#, path: 'images'
   end
 
   

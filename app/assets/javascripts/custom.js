@@ -338,9 +338,10 @@ function getImages(issue){
   markerImages.empty();
   $.ajax({
     type: "GET",
-    url: '/issues/' + issue.id + '/assets',
+    url: '/issues/' + issue.id + '/images',
     dataType: "JSON",
     success: function(images) {
+      console.log(images);
       $.each((images), function(index, image) {
         markerImages.append('<img class="marker-image-urls" src="'+ image + '">');
       });

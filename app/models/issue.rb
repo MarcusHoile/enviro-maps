@@ -1,6 +1,6 @@
 class Issue < ActiveRecord::Base
 	belongs_to :user 
-	has_many :assets
+	has_many :images
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :tag
 
