@@ -17,7 +17,8 @@
 .env
 
 /config/.database.sample.yml
-/config/.database.yml
+/config/database.yml
+/config/cloudinary.yml
 
 spec
 coverage
