@@ -192,6 +192,13 @@ a:hover {
 	border-radius: 15px;
 }
 
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+    line-height: 28px;
+}
+
 ul {
 	margin:0 auto;
 	padding:10px;
