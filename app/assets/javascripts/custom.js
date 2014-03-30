@@ -174,19 +174,18 @@ function initialize() {
     if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
   });
 
-  // add listener for any content window open, if click anywhere outside window it closes
-  google.maps.event.addListener(map, 'click', function() {
-    if (contentWindow.hasClass('slideInRight')){
-      contentWindow.toggleClass('slideInRight slideOutRight');
-      resetMap(map, maxZoom, map.getZoom()); 
-    }
-  });
+  // // add listener for any content window open, if click anywhere outside window it closes
+  // google.maps.event.addListener(map, 'click', function() {
+  //   if (contentWindow.hasClass('slideInRight')){
+  //     contentWindow.toggleClass('slideInRight slideOutRight');
+  //     resetMap(map, maxZoom, map.getZoom()); 
+  //   }
+  // });
   // add reset zoom function to nav bar button
   $('#reset-map').on('click', function(event) {
     event.preventDefault();
     if (contentWindow.hasClass('slideInRight')){
-      contentWindow.toggleClass('slideInRight slideOutRight');
-      resetMap(map, maxZoom, map.getZoom()); 
+      contentWindow.toggleClass('slideInRight slideOutRight'); 
     }
     resetMap(map, maxZoom, map.getZoom());
     if (markers.length > 0) {
@@ -256,7 +255,6 @@ function addAutocomplete(type){
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     {
-      // types: ['(cities)'],
       
     });
   places = new google.maps.places.PlacesService(map);
