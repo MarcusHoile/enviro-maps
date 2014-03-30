@@ -42,7 +42,6 @@ function initialize() {
   });
   search = $('#search');
   $('span').on('click', function(){
-    resetMap(map, maxZoom, map.getZoom());
     contentWindow.toggleClass('slideInRight slideOutRight');
   });
 
@@ -255,7 +254,7 @@ function addAutocomplete(type){
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     {
-      
+
     });
   places = new google.maps.places.PlacesService(map);
 
