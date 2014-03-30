@@ -3,13 +3,15 @@
 <% end %>
 <div id="map-container">
   <div id="zoom-control">
+    <div id="search">
+      <input type="text" class="form-control" id="autocomplete" placeholder="Enter a location to zoom in">
+    </div>
     <button id="zoom-out" class="btn btn-default zoom">-</button>
     <button id="zoom-in" class="btn btn-default zoom">+</button>
     <button id="reset-map" class="btn btn-default zoom">Reset Map</button>
+
   </div>
-  <div id="search">
-    <input type="text" class="form-control" id="autocomplete" placeholder="Enter a location to zoom in">
-  </div>
+
   <!-- <div id="marker-animation"></div> -->
   <div id="content-window" class="animated slideOutRight">
     <span class="marker-content">x</span>

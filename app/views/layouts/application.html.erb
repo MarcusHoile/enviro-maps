@@ -10,8 +10,10 @@
 </head>
 <body>
 	<nav>
-    <ul>
+    <ul id="left-nav">
       <li><a href="/">Enviro Maps</a></li>
+    </ul>
+    <ul id="right-nav">
   		<% if user_signed_in? %>
       <li><%= link_to "Submit an issue", new_user_issue_path(current_user) %></a></li>
       <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>

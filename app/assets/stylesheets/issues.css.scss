@@ -78,9 +78,9 @@ a:hover {
 
 #search {
 	width: 400px;
-	position:fixed;
-	right:20px;
-	top:70px;
+	/*position:fixed;*/
+	/*right:20px;*/
+	/*top:70px;*/
 	z-index:3;
 }
 
@@ -234,6 +234,16 @@ ul li a:visited {
 nav a {
 	text-decoration:none;
 	font-size:14px;
+}
+
+#right-nav {
+	margin-right: 140px;
+	display:inline-block;
+	float:right;
+}
+#left-nav {
+	margin-left: 140px;
+	display:inline-block;
 }
 
 
