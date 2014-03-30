@@ -399,7 +399,6 @@ function createMarker(issue) {
     // center and zoom in on location
     // check to see if animation has ended
     var location = new google.maps.LatLng(lat, lng);
-    search.toggle();
     map.panTo(location);
     smoothZoom(map, 6, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
     
@@ -427,7 +426,6 @@ function resetMap(map, maxZoom, current){
   }
   if (current == maxZoom) {
     lastClicked = {};
-    search.toggle();
     var center = new google.maps.LatLng(lat, lng);
     map.panTo(center);
   }
