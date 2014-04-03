@@ -65,6 +65,8 @@ GEM
       dotenv (= 0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    font-awesome-rails (4.0.3.1)
+      railties (>= 3.2, < 5.0)
     gon (5.0.4)
       actionpack (>= 2.3.0)
       json
@@ -185,6 +187,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
+  font-awesome-rails
   gon
   jbuilder (~> 1.2)
   jquery-rails

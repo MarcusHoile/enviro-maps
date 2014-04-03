@@ -38,6 +38,7 @@ gem 'cloudinary'
 # gem "paperclip", "~> 4.1"
 
 gem 'bootstrap-sass'
+gem "font-awesome-rails"
 
 # pass rails variables to javascript
 gem 'gon'
