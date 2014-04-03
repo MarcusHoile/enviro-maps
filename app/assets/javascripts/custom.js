@@ -174,13 +174,6 @@ function initialize() {
     if (map.getZoom() < maxZoom) map.setZoom(maxZoom);
   });
 
-  // // add listener for any content window open, if click anywhere outside window it closes
-  // google.maps.event.addListener(map, 'click', function() {
-  //   if (contentWindow.hasClass('slideInRight')){
-  //     contentWindow.toggleClass('slideInRight slideOutRight');
-  //     resetMap(map, maxZoom, map.getZoom()); 
-  //   }
-  // });
   // add reset zoom function to nav bar button
   $('#reset-map').on('click', function(event) {
     event.preventDefault();
@@ -255,9 +248,8 @@ function addAutocomplete(type){
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     {
-      // this is where you would put the options
-      // eg type: ['cities']
     });
+
   places = new google.maps.places.PlacesService(map);
 
   google.maps.event.addListener(autocomplete, 'place_changed', function(){
@@ -341,6 +333,8 @@ function getImages(issue){
     dataType: "JSON",
     success: function(images) {
       $.each((images), function(index, image) {
+        var carouselWidth = (images.length * 300)
+        markerImages.css('width', carouselWidth + 'px');
         markerImages.append('<img class="marker-image-urls" src="'+ image + '">');
       });
       
@@ -461,13 +455,19 @@ function editMarker(issue) {
 
 function slideLeft(){
   var margin = parseInt(carousel.css('margin-left'));
-  margin -= 200;
-  carousel.animate({marginLeft:  margin + 'px'});
+  var width = parseInt(carousel.css('width'));
+  if (Math.abs(margin) < (width-600)) {
+    margin -= 200;
+    carousel.animate({marginLeft:  margin + 'px'});
+  }
 }
 function slideRight(){
   var margin = parseInt(carousel.css('margin-left'));
-  margin += 200;
-  carousel.animate({marginLeft:  margin + 'px'});
+  var width = parseInt(carousel.css('width'));
+  if (margin < -1) {
+    margin += 200;
+    carousel.animate({marginLeft:  margin + 'px'});
+  }
 }
 
 
