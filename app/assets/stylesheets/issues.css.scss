@@ -13,29 +13,30 @@ form {
 	padding:10px;
 }
 
-.carousel-direction{
+.carousel-controls {
   position: absolute;
   left: 10px;
   top: 40%;
-  width: 40px;
-  height: 40px;
-  color: #ffffff;
+  /*width: 40px;*/
+  /*height: 40px;*/
+  /*color: #ffffff;*/
   font-size: 60px;
   font-weight: 100;
   line-height: 30px;
   text-align: center;
-  background: #222222;
-  border: 3px solid #ffffff;
-  opacity: 0.5;
-  border-radius: 23px;
+  /*background: #222222;*/
+  /*border: 3px solid #ffffff;*/
+  /*opacity: 0.5;*/
+  /*border-radius: 23px;*/
   z-index: 5;
-  text-decoration: none;
+  /*text-decoration: none;*/
+    color:red;
+  font-size:40px;
 }
 #next {
   right: 15px;
   left: auto;
-  color:red;
-  font-size:40px;
+
 }
 
 span {
