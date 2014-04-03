@@ -17,6 +17,7 @@ var bullseye = "/assets/bullseye.png";
 var search;
 var carousel;
 
+
 function initialize() {
   // set up default map options, and jquery selectors
   lat = 20;
@@ -27,8 +28,8 @@ function initialize() {
   markerImages = $('#marker-images');
   markerTags = $('#marker-tags');
   // setup carousel
-  carousel = $('#carousel');
-  // var next = $('#next').on('click', slideLeft);
+  carousel = $('.carousel');
+  var next = $('#next').on('click', slideLeft);
   // var previous = $('#previous').on('click', slideRight);
 
   // set zoom controls
@@ -321,9 +322,7 @@ function getTags(issue){
     url: '/issues/' + issue.id,
     dataType: "JSON",
     success: function(tags) {
-      console.log(tags)
       $.each((tags), function(index, tag) {
-        console.log(tag);
         markerTags.append('<li class="tags">'+ tag + '</li>');
       });
       
@@ -460,10 +459,15 @@ function editMarker(issue) {
   });
 }
 
-// function slideLeft(){
+function slideLeft(){
+  
+  var margin = parseInt(carousel.css('margin-left'));
+  
 
-//   // setup the initial values for the variables that are global
-// carousel.style.marginLeft = 0;
+  margin -= 200
+  carousel.animate({marginLeft:  margin + 'px'});
+  // setup the initial values for the variables that are global
+  // carousel.css('margin-left' '-200px');
 // timer = null;
 // timeDelay = 30;
 // // distance for banners to get back to begin
@@ -490,7 +494,7 @@ function editMarker(issue) {
 //       }
 
 //     }
-// }
+}
 
 
 
