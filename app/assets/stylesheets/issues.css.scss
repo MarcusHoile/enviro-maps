@@ -25,10 +25,15 @@ form {
 #reset-map:hover {
 	text-decoration:underline;
 }
-a:hover {
-	color: #2B4C7E;
 
+a {
+	color: #00ADEF;
 }
+
+a:hover {
+	color: #00ADEF;
+}
+
 
 #autocomplete {
 	margin:5px auto;
@@ -91,16 +96,17 @@ a:hover {
 }
 
 .marker-content {
-	padding: 5px 10px;
-	
+	padding: 5px 10px;	
 }
 
+
+
 #images-window {
-  position: relative;
+	position: relative;
+	overflow:hidden;
   width: 100%;
   height: 200px;
   margin: auto;
-  overflow: hidden;
 }
 
 
@@ -112,14 +118,9 @@ a:hover {
   height: 100%;
   padding: 0;
   margin:10px 0px;
-  overflow:hidden;
+  
 }
 
-
-#carousel {
-	width: 90%;
-
-}
 .marker-image-urls {
 	height:200px;
 	margin: 0 2px;
@@ -249,11 +250,6 @@ li {
 	text-align:center;
 }
 
-
-
-a {
-	color: #fff;
-}
 
 ul li {
 	background: #000;
