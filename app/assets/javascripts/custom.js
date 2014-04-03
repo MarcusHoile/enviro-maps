@@ -30,7 +30,7 @@ function initialize() {
   // setup carousel
   carousel = $('.carousel');
   var next = $('#next').on('click', slideLeft);
-  // var previous = $('#previous').on('click', slideRight);
+  var previous = $('#previous').on('click', slideRight);
 
   // set zoom controls
   $('#zoom-out').on('click', function(){
@@ -460,40 +460,14 @@ function editMarker(issue) {
 }
 
 function slideLeft(){
-  
   var margin = parseInt(carousel.css('margin-left'));
-  
-
-  margin -= 200
+  margin -= 200;
   carousel.animate({marginLeft:  margin + 'px'});
-  // setup the initial values for the variables that are global
-  // carousel.css('margin-left' '-200px');
-// timer = null;
-// timeDelay = 30;
-// // distance for banners to get back to begin
-//   // first check if at end point
-//   // if (parseInt(carousel.style.marginLeft) < 0) {
-//     // set an interval so slide smoothly
-//     timer = setInterval(slider, timeDelay);
-//     // have sliding in its own function so that you can stop interval
-//     function slider() { 
-//       // loop back to the beginning once you've hit the last banner 
-//       if (parseInt(carousel.style.marginLeft) === 0) {
-//         // need to stop current interval so this function doesnt run again.
-//         clearInterval(timer);
-//         // new function to reset the margin position
-//         timer2 = setInterval(resetSlider, timeDelay);
-//       } else {
-//         var bannerPosition = parseInt(carousel.style.marginLeft);
-//         var newBannerPosition = bannerPosition + 100;
-//         carousel.style.marginLeft = newBannerPosition + "px";
-//         // when the margin is divisible by banner width, stop interval
-//         if ((parseInt(carousel.style.marginLeft) % imgWidth) === 0) {
-//           clearInterval(timer);
-//         }
-//       }
-
-//     }
+}
+function slideRight(){
+  var margin = parseInt(carousel.css('margin-left'));
+  margin += 200;
+  carousel.animate({marginLeft:  margin + 'px'});
 }
 
 
