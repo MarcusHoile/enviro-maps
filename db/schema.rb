@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328022542) do
+ActiveRecord::Schema.define(version: 20140328002744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "images", force: true do |t|
     t.integer  "issue_id"
+    t.string   "image_item"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_item"
   end
 
   add_index "images", ["issue_id"], name: "index_images_on_issue_id", using: :btree
