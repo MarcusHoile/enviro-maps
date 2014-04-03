@@ -254,7 +254,8 @@ function addAutocomplete(type){
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     {
-
+      // this is where you would put the options
+      // eg type: ['cities']
     });
   places = new google.maps.places.PlacesService(map);
 
